@@ -34,17 +34,9 @@ Este proyecto es un espacio interactivo y compendio cultural nacido a partir de 
 
 ## 🚀 Cómo Explorar el Portal
 
-Dado que este proyecto está construido enteramente con tecnologías web nativas (Vanilla JS, HTML5 y CSS3), puedes explorarlo fácilmente:
+Este proyecto es una experiencia inmersiva diseñada para ejecutarse directamente en el navegador de forma fluida y autónoma. 
 
-### Opción 1: Visualización en vivo (GitHub Pages)
-Puedes ver el portal interactivo corriendo en vivo directamente desde GitHub Pages:
-👉 **[Visitar Portal de Ibeji & Umbanda](https://DSidCode.github.io/proyecto-ibeji-umbanda/)** *(Asegúrate de activar GitHub Pages en la configuración del repositorio apuntando a la rama `main`).*
+Puedes adentrarte en el universo interactivo, el compendio y el paisaje sonoro en vivo accediendo al portal oficial a través de GitHub Pages:
 
-### Opción 2: Ejecución Local
-Simplemente clona el repositorio y abre el archivo `index.html` en cualquier navegador:
+👉 **[Visitar Portal de Ibeji & Umbanda](https://DSidCode.github.io/proyecto-ibeji-umbanda/)**
 
-```bash
-git clone https://github.com/DSidCode/proyecto-ibeji-umbanda.git
-cd proyecto-ibeji-umbanda
-```
-Luego haz doble clic en `index.html` o ábrelo en tu navegador preferido.
