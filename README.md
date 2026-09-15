@@ -34,7 +34,17 @@ Este proyecto es un espacio interactivo y compendio cultural nacido a partir de 
 
 ## 🚀 Cómo Explorar el Portal
 
-Abre directamente el archivo [`index.html`](file:///home/sidzcool/GeminiSolutions/01_Proyectos_Activos/Proyecto_Ibeji_Umbanda/index.html) en cualquier navegador móvil o de escritorio:
+Dado que este proyecto está construido enteramente con tecnologías web nativas (Vanilla JS, HTML5 y CSS3), puedes explorarlo fácilmente:
+
+### Opción 1: Visualización en vivo (GitHub Pages)
+Puedes ver el portal interactivo corriendo en vivo directamente desde GitHub Pages:
+👉 **[Visitar Portal de Ibeji & Umbanda](https://DSidCode.github.io/proyecto-ibeji-umbanda/)** *(Asegúrate de activar GitHub Pages en la configuración del repositorio apuntando a la rama `main`).*
+
+### Opción 2: Ejecución Local
+Simplemente clona el repositorio y abre el archivo `index.html` en cualquier navegador:
+
 ```bash
-file:///home/sidzcool/GeminiSolutions/01_Proyectos_Activos/Proyecto_Ibeji_Umbanda/index.html
+git clone https://github.com/DSidCode/proyecto-ibeji-umbanda.git
+cd proyecto-ibeji-umbanda
 ```
+Luego haz doble clic en `index.html` o ábrelo en tu navegador preferido.
