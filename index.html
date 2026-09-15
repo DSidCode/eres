@@ -1,0 +1,6126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>ERÊS • Realismo Mágico, Cosmos & Alquimia | Maison Quintessence</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="alternate icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><circle cx='32' cy='32' r='30' fill='%23090d16'/><path d='M32 30 C38 18 50 12 54 22 C56 30 50 40 42 38 C46 44 44 50 38 50 C34 50 32 42 32 36 Z' fill='%23fbbf24'/><path d='M32 30 C26 18 14 12 10 22 C8 30 14 40 22 38 C18 44 20 50 26 50 C30 50 32 42 32 36 Z' fill='%23fbbf24'/><path d='M31 18 L33 18 L33 44 L31 44 Z' fill='%231c0c02'/><circle cx='32' cy='17' r='2' fill='%23ffd700'/></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Outfit:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-dark: #050711;
+      --panel-bg: rgba(13, 19, 36, 0.88);
+      --border-glow: rgba(56, 189, 248, 0.25);
+      --accent-cyan: #38bdf8;
+      --accent-gold: #fbbf24;
+      --accent-pink: #f472b6;
+      --accent-emerald: #34d399;
+      --accent-purple: #c084fc;
+      --text-main: #f8fafc;
+      --text-dim: #94a3b8;
+      --font-title: 'Cinzel', serif;
+      --font-body: 'Outfit', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      min-height: 100vh;
+      padding: 1rem;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+
+
+    /* CANVAS DE FONDO ANIMADO (PARTÍCULAS & DULCES) */
+    #magicalCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* LIENZO DE FONDO CÓSMICO Y MARIPOSAS AMARILLAS DE MACONDO (CANVAS HIGH-PERFORMANCE) */
+    #magicalCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* AUDIO FLOATING CONTROLLER / SOUNDSCAPE DOCK */
+    .audio-dock {
+      background: rgba(15, 23, 42, 0.95);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--accent-gold);
+      border-radius: 999px;
+      padding: 0.5rem 1.25rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.85rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 0 25px rgba(251, 191, 36, 0.25);
+    }
+
+    .audio-btn {
+      background: var(--accent-gold);
+      color: #000;
+      border: none;
+      border-radius: 999px;
+      padding: 0.4rem 0.9rem;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all 0.2s ease;
+    }
+
+    .audio-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 15px rgba(251, 191, 36, 0.5);
+    }
+
+    .eq-wave {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      height: 14px;
+    }
+
+    .eq-bar {
+      width: 3px;
+      height: 100%;
+      background: var(--accent-gold);
+      border-radius: 2px;
+      animation: eqPulse 1s ease-in-out infinite alternate;
+    }
+
+    .eq-bar:nth-child(2) { animation-delay: 0.2s; height: 60%; }
+    .eq-bar:nth-child(3) { animation-delay: 0.4s; height: 80%; }
+    .eq-bar:nth-child(4) { animation-delay: 0.1s; height: 40%; }
+
+    @keyframes eqPulse {
+      0% { transform: scaleY(0.3); }
+      100% { transform: scaleY(1); }
+    }
+
+    /* HEADER */
+    header {
+      background: var(--panel-bg);
+      backdrop-filter: blur(24px);
+      border: 1px solid var(--border-glow);
+      border-radius: 24px;
+      padding: 1.75rem 1.5rem;
+      margin-bottom: 1.5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--accent-cyan), var(--accent-pink), var(--accent-gold));
+    }
+
+    .hero-badge {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--accent-gold);
+      background: rgba(251, 191, 36, 0.15);
+      border: 1px solid rgba(251, 191, 36, 0.4);
+      padding: 0.3rem 0.85rem;
+      border-radius: 999px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 0.75rem;
+    }
+
+    header h1 {
+      font-family: var(--font-title);
+      font-size: clamp(1.8rem, 5vw, 2.75rem);
+      font-weight: 900;
+      letter-spacing: 2px;
+      background: linear-gradient(135deg, #ffffff 30%, var(--accent-cyan) 70%, var(--accent-gold) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.4rem;
+      line-height: 1.2;
+    }
+
+    header p {
+      color: var(--text-dim);
+      font-size: clamp(0.88rem, 2.5vw, 1.05rem);
+      max-width: 750px;
+      margin: 0.5rem auto 0;
+      line-height: 1.5;
+    }
+
+    /* WELCOME OVERLAY */
+    #welcomeOverlay {
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      background: rgba(5, 7, 17, 0.85);
+      backdrop-filter: blur(10px);
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 1s ease;
+    }
+    .welcome-title {
+      font-family: var(--font-title);
+      font-size: clamp(2rem, 6vw, 4rem);
+      font-weight: 900;
+      color: #fff;
+      letter-spacing: 4px;
+      text-shadow: 0 0 20px rgba(251, 191, 36, 0.5);
+      margin-bottom: 1rem;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 1.5s ease forwards 0.5s;
+      text-align: center;
+    }
+    .welcome-subtitle {
+      font-family: var(--font-title);
+      font-size: clamp(1rem, 3vw, 1.5rem);
+      color: var(--accent-gold);
+      font-style: italic;
+      margin-bottom: 3rem;
+      opacity: 0;
+      animation: fadeIn 2s ease forwards 1.5s;
+      text-align: center;
+      padding: 0 20px;
+    }
+    .btn-enter {
+      background: linear-gradient(135deg, rgba(251, 191, 36, 0.2), rgba(244, 114, 182, 0.2));
+      border: 1px solid var(--accent-gold);
+      color: #fef08a;
+      padding: 1rem 2.5rem;
+      border-radius: 999px;
+      font-family: var(--font-mono);
+      font-size: 1.1rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      cursor: pointer;
+      transition: all 0.4s ease;
+      box-shadow: 0 0 20px rgba(251, 191, 36, 0.2);
+      opacity: 0;
+      animation: fadeIn 2s ease forwards 2.5s;
+    }
+    .btn-enter:hover {
+      background: linear-gradient(135deg, rgba(251, 191, 36, 0.4), rgba(244, 114, 182, 0.4));
+      box-shadow: 0 0 30px rgba(251, 191, 36, 0.6);
+      transform: scale(1.05);
+      color: #fff;
+    }
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+    .content-hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    /* TOP NAVIGATION (PROFESSIONAL TOP BAR) */
+    .top-nav {
+      position: sticky;
+      top: 15px;
+      z-index: 100;
+      background: rgba(13, 19, 36, 0.7);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 0.5rem;
+      margin-bottom: 2rem;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+    
+    .tab-btn {
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--text-dim);
+      padding: 0.65rem 1.1rem;
+      border-radius: 12px;
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .tab-btn:hover, .tab-btn:active {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .tab-btn.active {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: var(--accent-gold);
+      color: #fff;
+      box-shadow: 0 0 15px rgba(251, 191, 36, 0.2);
+    }
+
+    /* CARD PANELS */
+    .panel {
+      background: var(--panel-bg);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 20px;
+      padding: clamp(1.25rem, 3vw, 2.25rem);
+      margin-bottom: 1.5rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .panel-header {
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .panel-title {
+      font-family: var(--font-title);
+      font-size: clamp(1.2rem, 3.5vw, 1.6rem);
+      color: var(--accent-gold);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .info-card {
+      background: rgba(8, 13, 26, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 16px;
+      padding: 1.25rem;
+      transition: all 0.3s ease;
+    }
+
+    .info-card:hover {
+      border-color: var(--border-glow);
+      transform: translateY(-2px);
+    }
+
+    .card-icon {
+      font-size: 1.75rem;
+      margin-bottom: 0.5rem;
+      display: inline-block;
+    }
+
+    .card-title {
+      font-family: var(--font-title);
+      font-size: 1.1rem;
+      color: var(--accent-cyan);
+      margin-bottom: 0.4rem;
+    }
+
+    .card-desc {
+      color: #cbd5e1;
+      font-size: 0.88rem;
+      line-height: 1.6;
+    }
+
+    /* STORY BOX */
+    .story-box {
+      background: linear-gradient(135deg, rgba(30, 27, 75, 0.6), rgba(15, 23, 42, 0.8));
+      border: 1px solid rgba(168, 85, 247, 0.3);
+      border-radius: 16px;
+      padding: 1.25rem 1.5rem;
+      line-height: 1.7;
+      color: #e2e8f0;
+      font-size: 0.92rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .story-box strong { color: var(--accent-gold); }
+
+    /* CINEMA / TRAILER SECTION */
+    .cinema-hero {
+      display: grid;
+      grid-template-columns: minmax(260px, 320px) 1fr;
+      gap: 1.5rem;
+      align-items: start;
+      margin-bottom: 2rem;
+    }
+
+    @media (max-width: 768px) {
+      .cinema-hero { grid-template-columns: 1fr; }
+    }
+
+    .poster-frame {
+      border-radius: 18px;
+      overflow: hidden;
+      border: 2px solid var(--accent-gold);
+      box-shadow: 0 0 30px rgba(251, 191, 36, 0.2);
+      background: #000;
+      width: 100%;
+      max-width: 320px;
+      margin: 0 auto;
+    }
+
+    .poster-img {
+      width: 100%;
+      height: auto;
+      display: block;
+      aspect-ratio: 9/16;
+      object-fit: cover;
+    }
+
+    .cinematic-meta {
+      background: rgba(8, 13, 26, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 18px;
+      padding: 1.5rem;
+    }
+
+    .movie-badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .tag-movie {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 6px;
+      font-weight: 700;
+    }
+
+    .tag-gabo { background: rgba(251, 191, 36, 0.2); color: var(--accent-gold); border: 1px solid rgba(251, 191, 36, 0.4); }
+    .tag-dali { background: rgba(56, 189, 248, 0.2); color: var(--accent-cyan); border: 1px solid rgba(56, 189, 248, 0.4); }
+    .tag-umbanda { background: rgba(192, 132, 252, 0.2); color: var(--accent-purple); border: 1px solid rgba(192, 132, 252, 0.4); }
+
+    .movie-title {
+      font-family: var(--font-title);
+      font-size: clamp(1.4rem, 4vw, 2rem);
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.2;
+      margin-bottom: 0.4rem;
+    }
+
+    .movie-subtitle {
+      font-family: var(--font-title);
+      font-size: 0.95rem;
+      color: var(--accent-gold);
+      font-style: italic;
+      margin-bottom: 1rem;
+    }
+
+    .synopsis-text {
+      color: #cbd5e1;
+      font-size: 0.9rem;
+      line-height: 1.7;
+      margin-bottom: 1.25rem;
+    }
+
+    /* SCENE PLAYER */
+    .trailer-player {
+      background: rgba(4, 8, 18, 0.95);
+      border: 1px solid var(--accent-cyan);
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 0 35px rgba(56, 189, 248, 0.15);
+      margin-bottom: 1.5rem;
+    }
+
+    .trailer-screen {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: #000;
+      overflow: hidden;
+    }
+
+    .trailer-screen-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: opacity 0.5s ease;
+    }
+
+    .trailer-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(0deg, rgba(0,0,0,0.95) 20%, rgba(0,0,0,0.7) 70%, transparent 100%);
+      padding: 1.5rem 1.25rem 1rem;
+      color: #fff;
+    }
+
+    .trailer-act {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--accent-gold);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 0.25rem;
+    }
+
+    .trailer-voiceover {
+      font-size: clamp(0.85rem, 2.2vw, 1.1rem);
+      font-style: italic;
+      line-height: 1.5;
+      color: #fef08a;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+    }
+
+    .trailer-controls {
+      padding: 1rem 1.25rem;
+      background: rgba(15, 23, 42, 0.95);
+      border-top: 1px solid rgba(255,255,255,0.1);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .scene-selector {
+      display: flex;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+    }
+
+    .scene-btn {
+      background: rgba(0,0,0,0.6);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: var(--text-dim);
+      padding: 0.4rem 0.8rem;
+      border-radius: 8px;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .scene-btn.active {
+      background: var(--accent-cyan);
+      color: #040812;
+      font-weight: 800;
+      border-color: var(--accent-cyan);
+    }
+
+    /* ART GALLERY */
+    .art-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .art-card {
+      background: rgba(8, 13, 26, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: all 0.3s;
+    }
+
+    .art-card:hover {
+      border-color: var(--accent-cyan);
+      transform: translateY(-3px);
+    }
+
+    .art-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      display: block;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .art-card-body {
+      padding: 1rem 1.25rem;
+    }
+
+    .art-card-title {
+      font-family: var(--font-title);
+      font-size: 1.05rem;
+      color: var(--accent-gold);
+      margin-bottom: 0.3rem;
+    }
+
+    .art-card-desc {
+      font-size: 0.85rem;
+      color: #cbd5e1;
+      line-height: 1.55;
+    }
+
+    /* JOURNAL */
+    .journal-form {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .form-input, .form-textarea {
+      width: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 10px;
+      padding: 0.75rem 1rem;
+      color: #fff;
+      font-family: inherit;
+      font-size: 0.9rem;
+    }
+
+    .btn-submit {
+      background: linear-gradient(135deg, var(--accent-cyan), #0284c7);
+      color: #040812;
+      border: none;
+      border-radius: 10px;
+      padding: 0.75rem 1.25rem;
+      font-weight: 800;
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
+
+    .memory-item {
+      background: rgba(8, 13, 26, 0.8);
+      border-left: 4px solid var(--accent-gold);
+      border-radius: 12px;
+      padding: 1rem 1.25rem;
+      margin-bottom: 0.75rem;
+      position: relative;
+    }
+
+    .memory-title {
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--accent-gold);
+      margin-bottom: 0.35rem;
+    }
+
+    .memory-content {
+      color: #cbd5e1;
+      font-size: 0.88rem;
+      line-height: 1.55;
+    }
+
+    /* PONTOS */
+    .ponto-card {
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(251, 191, 36, 0.2);
+      border-radius: 14px;
+      padding: 1.25rem;
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      line-height: 1.7;
+      color: #fef08a;
+    }
+
+    .ponto-title {
+      font-family: var(--font-title);
+      font-size: 1rem;
+      color: var(--accent-gold);
+      margin-bottom: 0.5rem;
+      border-bottom: 1px dashed rgba(251, 191, 36, 0.3);
+      padding-bottom: 0.4rem;
+    }
+
+    /* GÉNESIS & CASSIOPEA / ÓSCULO SID STYLES */
+    .genesis-hero {
+      background: linear-gradient(135deg, rgba(30, 27, 75, 0.7) 0%, rgba(15, 23, 42, 0.9) 100%);
+      border: 1px solid var(--accent-gold);
+      border-radius: 20px;
+      padding: 2rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .genesis-hero::before {
+      content: '';
+      position: absolute;
+      top: 0; right: 0; width: 250px; height: 250px;
+      background: radial-gradient(circle, rgba(251, 191, 36, 0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .character-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.25rem;
+      margin: 1.5rem 0;
+    }
+
+    .character-card {
+      background: rgba(8, 14, 28, 0.85);
+      border: 1px solid var(--border-glow);
+      border-radius: 16px;
+      padding: 1.5rem;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    .character-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--accent-gold);
+      box-shadow: 0 8px 25px rgba(251, 191, 36, 0.15);
+    }
+
+    .char-avatar {
+      font-size: 2.2rem;
+      margin-bottom: 0.5rem;
+      display: inline-block;
+    }
+
+    .char-name {
+      font-family: var(--font-title);
+      font-size: 1.25rem;
+      color: var(--accent-gold);
+      margin-bottom: 0.25rem;
+    }
+
+    .char-role {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: var(--accent-cyan);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 0.75rem;
+    }
+
+    .char-bio {
+      font-size: 0.88rem;
+      color: #cbd5e1;
+      line-height: 1.6;
+    }
+
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+      margin-top: 1.25rem;
+    }
+
+    .pillar-card {
+      background: rgba(15, 23, 42, 0.75);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      padding: 1.25rem;
+      transition: all 0.2s;
+    }
+
+    .pillar-card:hover {
+      border-color: var(--accent-cyan);
+      background: rgba(15, 23, 42, 0.95);
+    }
+
+    .pillar-icon {
+      font-size: 1.8rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .pillar-title {
+      font-family: var(--font-title);
+      font-size: 0.95rem;
+      color: #fff;
+      margin-bottom: 0.35rem;
+    }
+
+    .pillar-desc {
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      line-height: 1.5;
+    }
+
+    .love-story-quote {
+      background: rgba(251, 191, 36, 0.08);
+      border-left: 4px solid var(--accent-gold);
+      border-radius: 0 14px 14px 0;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+      font-style: italic;
+      color: #fef08a;
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+
+    /* PRO MUSIC PLAYER & CASSIOPEA JUKEBOX */
+    .audio-dock-pro {
+      background: rgba(12, 18, 34, 0.55);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-top: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 24px;
+      padding: 1.5rem 1.8rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(255, 255, 255, 0.02);
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .player-main-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      flex-wrap: nowrap; /* EVITA QUE LOS BOTONES SE MUEVAN AL AÑADIR SCROLL Y FORZAR WRAP */
+    }
+    
+    @media (max-width: 850px) {
+      .player-main-row {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .player-controls-row {
+        justify-content: center;
+      }
+    }
+
+    .player-track-info {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      width: 380px; /* Fija el ancho para que no empuje los botones */
+      flex-shrink: 0;
+    }
+
+    .player-track-info > div:last-child {
+      overflow: hidden; /* Necesario para que funcione el text-overflow */
+    }
+
+    .track-cover-badge {
+      width: 48px;
+      height: 48px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #1e1b4b, #312e81);
+      border: 1px solid var(--accent-gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      box-shadow: 0 4px 12px rgba(251, 191, 36, 0.25);
+      flex-shrink: 0;
+    }
+
+    .track-title {
+      font-family: var(--font-title);
+      font-size: 1rem;
+      color: #fff;
+      margin-bottom: 0.15rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .track-artist {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--accent-cyan);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .player-controls-row {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .ctrl-btn {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #fff;
+      border-radius: 50%;
+      width: 38px;
+      height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .ctrl-btn:hover {
+      background: rgba(251, 191, 36, 0.2);
+      border-color: var(--accent-gold);
+      transform: scale(1.08);
+    }
+
+    .ctrl-btn-play {
+      background: linear-gradient(135deg, var(--accent-gold), #f59e0b);
+      color: #040812;
+      border: none;
+      width: 46px;
+      height: 46px;
+      font-size: 1.15rem;
+      box-shadow: 0 4px 15px rgba(251, 191, 36, 0.4);
+    }
+
+    .ctrl-btn-play:hover {
+      background: linear-gradient(135deg, #fef08a, var(--accent-gold));
+      transform: scale(1.1);
+    }
+
+    .btn-generator-random {
+      background: linear-gradient(135deg, rgba(192, 132, 252, 0.25), rgba(56, 189, 248, 0.25));
+      border: 1px solid var(--accent-cyan);
+      color: #38bdf8;
+      border-radius: 20px;
+      padding: 0.45rem 1rem;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .btn-generator-random:hover {
+      background: linear-gradient(135deg, rgba(192, 132, 252, 0.45), rgba(56, 189, 248, 0.45));
+      color: #fff;
+      box-shadow: 0 4px 15px rgba(56, 189, 248, 0.3);
+    }
+
+    .btn-auto-next {
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #94a3b8;
+      border-radius: 20px;
+      padding: 0.45rem 0.9rem;
+      font-family: var(--font-mono);
+      font-size: 0.76rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .btn-auto-next:hover {
+      border-color: var(--accent-gold);
+      color: #fff;
+    }
+
+    .btn-auto-next.active {
+      background: linear-gradient(135deg, rgba(34, 197, 94, 0.25), rgba(56, 189, 248, 0.25));
+      border-color: #4ade80;
+      color: #86efac;
+      font-weight: 700;
+      box-shadow: 0 0 12px rgba(74, 222, 128, 0.3);
+    }
+
+    .player-category-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      padding-top: 1rem;
+    }
+
+    .player-category-tabs {
+      display: flex;
+      gap: 0.35rem;
+    }
+
+    .cat-tab-btn {
+      background: transparent;
+      border: none;
+      color: #64748b;
+      font-family: var(--font-mono);
+      font-size: 0.73rem;
+      padding: 0.25rem 0.6rem;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .cat-tab-btn:hover {
+      color: #cbd5e1;
+    }
+
+    .cat-tab-btn.active {
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--accent-gold);
+      font-weight: 700;
+    }
+
+    .player-toast-notify {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--accent-cyan);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      white-space: nowrap;
+    }
+
+    .player-toast-notify.show {
+      opacity: 1;
+    }
+
+    .track-playlist-pills {
+      display: flex;
+      gap: 0.6rem;
+      overflow-x: auto;
+      padding: 0.5rem 0.2rem;
+      scrollbar-width: none; /* Firefox */
+      -ms-overflow-style: none; /* IE/Edge */
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      /* Efecto de desvanecido en los bordes para indicar más contenido */
+      mask-image: linear-gradient(to right, transparent, black 3%, black 97%, transparent);
+      -webkit-mask-image: linear-gradient(to right, transparent, black 3%, black 97%, transparent);
+    }
+    
+    .track-playlist-pills::-webkit-scrollbar {
+      display: none; /* Chrome/Safari/Webkit: OCULTAR SCROLLBAR HORRIBLE */
+    }
+
+    .track-pill {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: #94a3b8;
+      padding: 0.5rem 1rem;
+      border-radius: 30px;
+      font-size: 0.78rem;
+      white-space: nowrap;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .track-pill:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.2);
+      color: #fff;
+      transform: translateY(-2px);
+    }
+
+    .track-pill.active {
+      background: linear-gradient(135deg, rgba(251, 191, 36, 0.15), rgba(244, 114, 182, 0.15));
+      border: 1px solid var(--accent-gold);
+      color: #fff;
+      font-weight: 700;
+      box-shadow: 0 4px 15px rgba(251, 191, 36, 0.2), inset 0 0 10px rgba(251, 191, 36, 0.1);
+    }
+
+    /* BRAND MANUAL & PALETTE STYLES */
+    .palette-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.25rem;
+      margin: 1.5rem 0;
+    }
+
+    .swatch-card {
+      background: rgba(8, 14, 28, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: all 0.3s;
+    }
+
+    .swatch-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+      border-color: var(--accent-cyan);
+    }
+
+    .swatch-color-box {
+      height: 90px;
+      width: 100%;
+      position: relative;
+    }
+
+    .swatch-info {
+      padding: 1rem;
+    }
+
+    .swatch-name {
+      font-family: var(--font-title);
+      font-size: 1rem;
+      color: #fff;
+      margin-bottom: 0.25rem;
+    }
+
+    .swatch-hex {
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      color: var(--accent-gold);
+      margin-bottom: 0.5rem;
+    }
+
+    .swatch-desc {
+      font-size: 0.78rem;
+      color: var(--text-dim);
+      line-height: 1.45;
+    }
+
+    footer {
+      text-align: center;
+      color: var(--text-dim);
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      margin-top: 2rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    /* MODO ZEN (OCULTAR UI) */
+    body.zen-active #mainContainer {
+      display: none !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
+    }
+    
+    #mainContainer {
+      transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+.constellation-select {
+      background: rgba(10, 14, 28, 0.85);
+      border: 1px solid rgba(212, 163, 89, 0.4);
+      border-radius: 20px;
+      color: #f1f5f9;
+      font-family: var(--font-cinzel);
+      font-size: 0.75rem;
+      padding: 5px 12px;
+      outline: none;
+      cursor: pointer;
+      backdrop-filter: blur(8px);
+      transition: all 0.3s ease;
+    }
+    .constellation-select:hover {
+      border-color: #d4a359;
+      box-shadow: 0 0 12px rgba(212, 163, 89, 0.3);
+    }
+    .constellation-select option {
+      background: #0b0f19;
+      color: #f1f5f9;
+    }
+
+    .zen-btn {
+      position: fixed;
+      bottom: 24px;
+      left: 24px;
+      right: auto;
+      background: rgba(10, 15, 30, 0.75);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(251, 191, 36, 0.35);
+      color: var(--accent-gold);
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      cursor: pointer;
+      z-index: 9999;
+      box-shadow: 0 6px 25px rgba(0, 0, 0, 0.6), 0 0 12px rgba(251, 191, 36, 0.2);
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .zen-btn.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .zen-btn:hover {
+      background: rgba(251, 191, 36, 0.2);
+      border-color: #38bdf8;
+      transform: scale(1.1);
+      box-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
+    }
+
+    body.zen-active .zen-btn {
+      opacity: 0.3; /* Sutil para no estorbar en contemplación */
+    }
+
+    body.zen-active .zen-btn:hover {
+      opacity: 1;
+      transform: scale(1.1);
+    }
+
+    @media (max-width: 768px) {
+      .zen-btn {
+        bottom: 16px;
+        left: 16px;
+        width: 44px;
+        height: 44px;
+        font-size: 1.1rem;
+      }
+    }
+  
+    /* =========================================================================
+       LUXURY SIGNATURE FOOTER (EDITORIAL SHOWCASE & HIGH-TICKET SHOWCASE)
+       ========================================================================= */
+    .luxury-footer {
+      position: relative;
+      margin-top: 5rem;
+      padding: 3rem 1.5rem 2rem 1.5rem;
+      background: linear-gradient(180deg, rgba(8, 12, 24, 0.4) 0%, rgba(5, 7, 17, 0.98) 100%);
+      border-top: 1px solid rgba(251, 191, 36, 0.25);
+      border-radius: 28px 28px 0 0;
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      box-shadow: 0 -15px 50px rgba(0, 0, 0, 0.7);
+      z-index: 10;
+    }
+
+    .footer-glow-line {
+      position: absolute;
+      top: -1px;
+      left: 15%;
+      right: 15%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #fbbf24, #38bdf8, #f472b6, transparent);
+      box-shadow: 0 0 16px rgba(251, 191, 36, 0.6);
+    }
+
+    .luxury-showcase-card {
+      max-width: 960px;
+      margin: 0 auto 2.5rem auto;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 20px;
+      padding: 2.5rem 2rem;
+      text-align: center;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 10px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .showcase-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .showcase-brand-badge {
+      font-family: var(--font-mono, monospace);
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      color: #fbbf24;
+      background: rgba(251, 191, 36, 0.1);
+      border: 1px solid rgba(251, 191, 36, 0.3);
+      padding: 3px 12px;
+      border-radius: 20px;
+      text-transform: uppercase;
+    }
+
+    .showcase-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      color: #fbbf24;
+      margin: 0.25rem 0 0 0;
+      text-shadow: 0 0 20px rgba(251, 191, 36, 0.4);
+    }
+
+    .showcase-creator {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 0.25rem;
+    }
+
+    .creator-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    .creator-name-link {
+      font-family: 'Cinzel', serif;
+      font-size: 1.25rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      color: #ffffff;
+      text-decoration: none;
+      background: linear-gradient(135deg, #ffffff 0%, #38bdf8 50%, #c084fc 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      transition: all 0.3s ease;
+    }
+
+    .creator-name-link:hover {
+      filter: drop-shadow(0 0 12px rgba(56, 189, 248, 0.9));
+      transform: scale(1.03);
+    }
+
+    .creator-tag {
+      font-family: var(--font-mono, monospace);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      color: #38bdf8;
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+
+    .showcase-tagline {
+      font-size: 0.92rem;
+      color: rgba(255, 255, 255, 0.75);
+      max-width: 620px;
+      margin: 0.5rem auto 0 auto;
+      line-height: 1.5;
+    }
+
+    /* GRID SIMÉTRICO DE 4 BOTONES DE ACCIÓN */
+    .showcase-actions-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .showcase-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border-radius: 30px;
+      font-family: 'Cinzel', serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-decoration: none;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .pill-danisid {
+      background: rgba(56, 189, 248, 0.08);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      color: #bae6fd;
+    }
+    .pill-danisid:hover {
+      background: rgba(56, 189, 248, 0.22);
+      border-color: #38bdf8;
+      box-shadow: 0 0 16px rgba(56, 189, 248, 0.45);
+      transform: translateY(-2px);
+      color: #fff;
+    }
+
+    .pill-maison {
+      background: rgba(251, 191, 36, 0.08);
+      border: 1px solid rgba(251, 191, 36, 0.35);
+      color: #fef08a;
+    }
+    .pill-maison:hover {
+      background: rgba(251, 191, 36, 0.22);
+      border-color: #fbbf24;
+      box-shadow: 0 0 16px rgba(251, 191, 36, 0.4);
+      transform: translateY(-2px);
+      color: #fff;
+    }
+
+    .pill-whatsapp {
+      background: rgba(37, 211, 102, 0.1);
+      border: 1px solid rgba(37, 211, 102, 0.4);
+      color: #86efac;
+    }
+    .pill-whatsapp:hover {
+      background: rgba(37, 211, 102, 0.25);
+      border-color: #25d366;
+      box-shadow: 0 0 16px rgba(37, 211, 102, 0.45);
+      transform: translateY(-2px);
+      color: #fff;
+    }
+
+    .pill-email {
+      background: rgba(192, 132, 252, 0.08);
+      border: 1px solid rgba(192, 132, 252, 0.35);
+      color: #e9d5ff;
+    }
+    .pill-email:hover {
+      background: rgba(192, 132, 252, 0.22);
+      border-color: #c084fc;
+      box-shadow: 0 0 16px rgba(192, 132, 252, 0.45);
+      transform: translateY(-2px);
+      color: #fff;
+    }
+
+    .pill-arrow {
+      font-size: 0.85rem;
+      transition: transform 0.2s ease;
+    }
+    .showcase-pill:hover .pill-arrow {
+      transform: translate(2px, -2px);
+    }
+
+    .footer-bottom-bar {
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding-top: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      font-size: 0.78rem;
+      color: rgba(255, 255, 255, 0.55);
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    .footer-tags span {
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    @media (max-width: 900px) {
+      .showcase-actions-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 580px) {
+      .showcase-actions-grid {
+        grid-template-columns: 1fr;
+      }
+      .luxury-showcase-card {
+        padding: 1.5rem 1rem;
+      }
+    }
+    /* =========================================================================
+       BOTÓN FLOTANTE WHATSAPP (ICON-ONLY LUXURY GLASS)
+       ========================================================================= */
+    .floating-whatsapp-btn {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(10, 15, 30, 0.75);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      color: #ffffff;
+      border-radius: 50%;
+      text-decoration: none;
+      z-index: 9990;
+      box-shadow: 0 6px 25px rgba(0, 0, 0, 0.6), 0 0 12px rgba(251, 191, 36, 0.2);
+      border: 1px solid rgba(251, 191, 36, 0.35);
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      cursor: pointer;
+    }
+
+    .floating-whatsapp-btn:hover {
+      background: rgba(37, 211, 102, 0.25);
+      border-color: #25d366;
+      transform: scale(1.1);
+      box-shadow: 0 0 20px rgba(37, 211, 102, 0.5);
+    }
+
+    .wa-svg {
+      width: 26px;
+      height: 26px;
+      fill: #25d366;
+      transition: fill 0.3s ease;
+    }
+    .floating-whatsapp-btn:hover .wa-svg {
+      fill: #ffffff;
+    }
+
+    .wa-luxury-tooltip {
+      position: absolute;
+      right: 62px;
+      background: rgba(10, 15, 30, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(37, 211, 102, 0.4);
+      color: #86efac;
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-family: 'Cinzel', serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateX(8px);
+      transition: all 0.25s ease;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    }
+
+    .floating-whatsapp-btn:hover .wa-luxury-tooltip {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    body.zen-active .floating-whatsapp-btn {
+      opacity: 0.3;
+    }
+    body.zen-active .floating-whatsapp-btn:hover {
+      opacity: 1;
+      transform: scale(1.1);
+    }
+
+    @media (max-width: 768px) {
+      .floating-whatsapp-btn {
+        bottom: 16px;
+        right: 16px;
+        width: 44px;
+        height: 44px;
+      }
+      .wa-svg {
+        width: 22px;
+        height: 22px;
+      }
+      .wa-luxury-tooltip {
+        display: none;
+      }
+    }
+    /* =========================================================================
+       BARRA DE UBICACIÓN SAGRADA DESPLEGABLE / RETRÁCTIL (COLLAPSIBLE)
+       ========================================================================= */
+    .sky-location-bar {
+      position: fixed;
+      top: 18px;
+      right: 20px;
+      left: auto;
+      transform: none;
+      display: flex;
+      align-items: center;
+      background: rgba(10, 15, 30, 0.88);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-radius: 30px;
+      border: 1px solid rgba(251, 191, 36, 0.35);
+      z-index: 9999;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6), 0 0 15px rgba(251, 191, 36, 0.15);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      max-width: 95vw;
+    }
+
+    .sky-bar-toggle-trigger {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      background: none;
+      border: none;
+      color: #fef08a;
+      font-family: 'Cinzel', serif;
+      font-size: 0.74rem;
+      letter-spacing: 0.08em;
+      cursor: pointer;
+      text-transform: uppercase;
+      border-radius: 30px;
+      transition: background 0.2s;
+    }
+    .sky-bar-toggle-trigger:hover {
+      background: rgba(251, 191, 36, 0.12);
+    }
+
+    .sky-bar-body {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0 10px 0 0;
+      overflow: hidden;
+      max-width: 550px;
+      opacity: 1;
+      transition: max-width 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease, padding 0.3s ease;
+    }
+
+    /* Estado Plegado / Recogido */
+    .sky-location-bar.collapsed .sky-bar-body {
+      max-width: 0;
+      opacity: 0;
+      padding: 0;
+      pointer-events: none;
+    }
+
+    .arrow-indicator {
+      display: inline-block;
+      transition: transform 0.3s ease;
+      font-size: 0.7rem;
+      color: #fbbf24;
+    }
+    .sky-location-bar.collapsed .arrow-indicator {
+      transform: rotate(-90deg);
+    }
+
+    .location-buttons {
+      display: flex;
+      gap: 6px;
+    }
+
+    .loc-btn {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: rgba(255, 255, 255, 0.85);
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-family: 'Cinzel', serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      white-space: nowrap;
+    }
+
+    .loc-btn:hover {
+      background: rgba(251, 191, 36, 0.15);
+      border-color: rgba(251, 191, 36, 0.4);
+      color: #fff;
+    }
+
+    .loc-btn.active {
+      background: linear-gradient(135deg, rgba(251, 191, 36, 0.25), rgba(244, 114, 182, 0.2));
+      border-color: #fbbf24;
+      color: #fef08a;
+      box-shadow: 0 0 12px rgba(251, 191, 36, 0.35);
+    }
+
+    .sky-toggle-group {
+      display: flex;
+      gap: 5px;
+      padding-left: 6px;
+      border-left: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .icon-toggle {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 0.80rem;
+      transition: all 0.2s ease;
+      color: rgba(255, 255, 255, 0.75);
+    }
+
+    .icon-toggle:hover {
+      background: rgba(255, 255, 255, 0.15);
+      color: #fff;
+    }
+
+    .icon-toggle.active {
+      border-color: #38bdf8;
+      color: #38bdf8;
+      box-shadow: 0 0 10px rgba(56, 189, 248, 0.3);
+    }
+
+    /* En Modo Zen, se traslada abajo al centro */
+    body.zen-active .sky-location-bar {
+      top: auto;
+      bottom: 24px;
+      left: 50%;
+      right: auto;
+      transform: translateX(-50%);
+      background: rgba(10, 15, 30, 0.7);
+    }
+
+    @media (max-width: 800px) {
+      .footer-content-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+      .floating-whatsapp-btn {
+        bottom: 16px;
+        right: 16px;
+        padding: 8px 12px;
+      }
+      .wa-tooltip-text {
+        display: none;
+      }
+      .sky-location-bar {
+        top: 10px;
+        right: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- WELCOME OVERLAY -->
+  <div id="welcomeOverlay">
+    <h1 class="welcome-title">ERÊS</h1>
+    <h2 class="welcome-subtitle">La Alegría Sagrada de Bahía & Realismo Mágico</h2>
+    <button class="btn-enter" onclick="enterExperience()">Adentrarse</button>
+  </div>
+
+  <!-- BACKGROUNDS -->
+
+  <canvas id="magicalCanvas"></canvas>
+
+  <div class="container content-hidden" id="mainContainer">
+
+  <!-- HEADER -->
+  <header>
+    <!-- CASSIOPEA JUKEBOX PRO & MUSIC PLAYER (10 MODOS & PASE CONTINUO) -->
+    <div class="audio-dock-pro">
+      <div class="player-main-row">
+        
+        <!-- TRACK INFO & COVER -->
+        <div class="player-track-info">
+          <div class="track-cover-badge" id="playerCoverEmoji">🇧🇷</div>
+          <div>
+            <div class="track-title" id="playerTrackTitle">Se Essa Rua Fosse Minha</div>
+            <div class="track-artist" id="playerTrackArtist">Ana Santos • Cantiga Tradicional de Bahía & Amor</div>
+          </div>
+        </div>
+
+        <!-- PLAYBACK CONTROLS -->
+        <div class="player-controls-row">
+          <button class="ctrl-btn" onclick="prevTrack()" title="Sonido Anterior (Pase Atrás)">⏮️</button>
+          <button class="ctrl-btn ctrl-btn-play" id="mainPlayBtn" onclick="togglePlayTrack()" title="Reproducir / Pausar">▶️</button>
+          <button class="ctrl-btn" onclick="nextTrack()" title="Siguiente Sonido (Pase Adelante)">⏭️</button>
+          <button class="btn-generator-random" onclick="generateRandomAlchemicalMusic()" title="Generar Composición Aleatoria Única">
+            <span>🎲</span>
+            <span>Generador Cuántico</span>
+          </button>
+        </div>
+
+        <!-- EQ VISUALIZER -->
+        <div class="eq-wave" id="eqWaveVisualizer" style="opacity: 0.4;">
+          <div class="eq-bar"></div>
+          <div class="eq-bar"></div>
+          <div class="eq-bar"></div>
+          <div class="eq-bar"></div>
+        </div>
+
+      </div>
+
+      <!-- CATEGORY TABS & AUTO-PASE CONTROLS ROW -->
+      <div class="player-category-row">
+        <div class="player-category-tabs">
+          <button class="cat-tab-btn active" id="catBtn-all" onclick="filterPlayerCategory('all')">🌟 Todo (10)</button>
+          <button class="cat-tab-btn" id="catBtn-songs" onclick="filterPlayerCategory('songs')">🇧🇷 Canciones (7)</button>
+          <button class="cat-tab-btn" id="catBtn-ambient" onclick="filterPlayerCategory('ambient')">🌌 Atmósferas 432Hz (3)</button>
+        </div>
+        <div style="display: flex; align-items: center; gap: 0.6rem;">
+          <div class="player-toast-notify" id="playerToast">▶️ Pase Listo</div>
+          <button class="btn-auto-next active" id="autoNextBtn" onclick="toggleAutoNext()" title="Pase Automático Continuo a la siguiente pista tras cada ciclo">
+            <span>🔁</span>
+            <span id="autoNextText">Auto-Pase: ON</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- PLAYLIST SELECTOR PILLS (10 TRACKS) -->
+      <div class="track-playlist-pills" id="trackPillsContainer">
+        <!-- CANCIONES -->
+        <button class="track-pill active" data-cat="songs" id="pill-0" onclick="selectTrack(0)">🇧🇷 1. Se Essa Rua Fosse Minha (Cantiga)</button>
+        <button class="track-pill" data-cat="songs" id="pill-1" onclick="selectTrack(1)">🎹 2. Comptine d'un Autre Été (Rogerio Tutti)</button>
+        <button class="track-pill" data-cat="songs" id="pill-2" onclick="selectTrack(2)">🌙 3. Claro de Luna (Beethoven / Moonlight)</button>
+        <button class="track-pill" data-cat="songs" id="pill-3" onclick="selectTrack(3)">👶 4. Eu Tava Aqui Pensando (Erês & Bahía)</button>
+        <button class="track-pill" data-cat="songs" id="pill-4" onclick="selectTrack(4)">🔥 5. Sua Amiga Vou Sarrar (MC Levin / Funk)</button>
+        <button class="track-pill" data-cat="songs" id="pill-5" onclick="selectTrack(5)">🎸 6. Bossa Nova Cósmica (Tom Jobim)</button>
+        <button class="track-pill" data-cat="songs" id="pill-6" onclick="selectTrack(6)">🎲 7. Alquimia Procedural (Infinita)</button>
+        <!-- ATMÓSFERAS & FRECUENCIAS 432 HZ -->
+        <button class="track-pill" data-cat="ambient" id="pill-7" onclick="selectTrack(7)">🐋 8. Ballenas & Olas de Bahía (432 Hz)</button>
+        <button class="track-pill" data-cat="ambient" id="pill-8" onclick="selectTrack(8)">🪘 9. Ponto Sagrado de Umbanda (Batá)</button>
+        <button class="track-pill" data-cat="ambient" id="pill-9" onclick="selectTrack(9)">🌧️ 10. Lluvia de Macondo & Sanación (528 Hz)</button>
+      </div>
+    </div>
+
+    <div class="hero-badge" style="letter-spacing: 2px;">QUIMERA ALCHEMIST • MAISON QUINTESSENCE</div>
+    <h1>ERÊS</h1>
+    <p>
+      El universo de los Orixás gemelos, la pureza de los Erês y la caridad universal de la Umbanda. Nacido de las conversaciones mágicas entre Cassiopea ✨🌌 y Ósculo Sid 💫, con Realismo Mágico de Gabriel García Márquez, arte surrealista y Bossa Nova Cósmica.
+    </p>
+  </header>
+
+  <!-- NAVIGATION TABS (TOP NAV PRO) -->
+  <nav class="top-nav">
+    <button class="tab-btn active" onclick="showTab('cinema')">🎬 Filme</button>
+    <button class="tab-btn" onclick="showTab('genesis')">🌹 Génesis</button>
+    <button class="tab-btn" onclick="showTab('brand')">🎨 Marca</button>
+    <button class="tab-btn" onclick="showTab('lore')">💡 Lore</button>
+    <button class="tab-btn" onclick="showTab('ibeji')">👶 Ibeji</button>
+    <button class="tab-btn" onclick="showTab('umbanda')">🌿 Umbanda</button>
+    <button class="tab-btn" onclick="showTab('eres')">🍭 Erês</button>
+    <button class="tab-btn" onclick="showTab('pontos')">🪘 Pontos</button>
+    <button class="tab-btn" onclick="showTab('journal')">📖 Relatos</button>
+  </nav>
+
+  <!-- TAB 0: CINEMA & TRAILER (REALISMO MÁGICO + DALÍ) -->
+  <div id="tab-cinema" class="tab-content">
+    
+    <!-- CINEMA HERO: POSTER (9:16 INSTAGRAM STORY) + SYNOPSIS -->
+    <div class="cinema-hero">
+      <div class="poster-frame">
+        <img src="assets/images/cartel_instagram_story_9_16.jpg" alt="Cartel Oficial IBEJI: Los Hijos del Sol y el Azúcar" class="poster-img">
+      </div>
+
+      <div class="cinematic-meta">
+        <div class="movie-badge-row">
+          <span class="tag-movie tag-gabo">✨ Realismo Mágico (Gabo)</span>
+          <span class="tag-movie tag-dali">🎨 Surrealismo Onírico</span>
+          <span class="tag-movie tag-umbanda">🍭 Los Erês & Umbanda</span>
+        </div>
+        <h2 class="movie-title">IBEJI: LOS HIJOS DEL SOL Y EL AZÚCAR</h2>
+        <div class="movie-subtitle">"La tarde en que el cielo llovió caramelos de cristal y la Muerte se puso a bailar."</div>
+        
+        <p class="synopsis-text">
+          En un pueblo suspendido entre la ciénaga y el infinito, donde miles de mariposas amarillas flotan sobre el agua y elefantes con patas de zancos caminan al atardecer, la Muerte (<em>Ikú</em>) ha tendido trampas invisibles para robarle el aliento a la humanidad. Pero cuando dos niños gemelos de ébano y luz golpean un tambor templado con la leche de las estrellas, la Muerte se ve forzada a un baile eterno que terminará por devolverle la risa a la tierra.
+        </p>
+
+        <div style="font-family: var(--font-mono); font-size: 0.78rem; color: var(--text-dim); border-top: 1px solid rgba(255,255,255,0.1); padding-top: 0.75rem;">
+          <p>🎬 <strong>Guion Literario:</strong> Inspirado en el Realismo Mágico de Gabriel García Márquez</p>
+          <p>🎨 <strong>Dirección de Arte:</strong> Surrealismo Onírico de los Erês</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- INTERACTIVE TRAILER PLAYER -->
+    <div class="panel">
+      <div class="panel-header">
+        <div class="panel-title">📽️ Simulador Interactivo del Tráiler Oficial</div>
+      </div>
+
+      <div class="trailer-player">
+        <div class="trailer-screen">
+          <img id="trailerImg" src="assets/images/escena_danza_muerte.jpg" alt="Escena del Trailer" class="trailer-screen-img">
+          <div class="trailer-caption">
+            <div class="trailer-act" id="trailerActText">ACTO I • EL PRESAGIO DE LAS MARIPOSAS</div>
+            <div class="trailer-voiceover" id="trailerVoiceText">
+              "Muchos años después, frente a la orilla del río de los almendros secos, el pueblo habría de recordar aquella tarde luminosa en que la Muerte olvidó cómo se recogían los muertos..."
+            </div>
+          </div>
+        </div>
+
+        <div class="trailer-controls">
+          <div class="scene-selector">
+            <button class="scene-btn active" onclick="loadScene(0)">Acto I: El Presagio</button>
+            <button class="scene-btn" onclick="loadScene(1)">Acto II: La Danza de Ikú</button>
+            <button class="scene-btn" onclick="loadScene(2)">Acto III: La Lluvia de Dulces</button>
+            <button class="scene-btn" onclick="loadScene(3)">Acto IV: Cartel Oficial</button>
+          </div>
+          <div style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--accent-gold);">
+            🔊 Banda Sonora: Tambores Batá & Chelo Melancólico
+          </div>
+        </div>
+      </div>
+
+      <!-- ART GALLERY ORGANIZADA POR CAPÍTULOS -->
+      <div class="panel-header" style="margin-top: 1.5rem;">
+        <div class="panel-title" style="font-size: 1.2rem;">🎨 Galería Maestra por Capítulos (Alquimia, Dalí & Gabo)</div>
+      </div>
+
+      <div class="art-gallery">
+        <!-- CAPÍTULO I -->
+        <div class="art-card">
+          <img src="assets/images/cartel_instagram_story_9_16.jpg" alt="Capítulo I">
+          <div class="art-card-body">
+            <div class="art-card-title">Capítulo I: Los Hijos del Sol y el Azúcar</div>
+            <div class="art-card-desc">
+              La trinidad sagrada de los Erês en flores de loto con la cascada de dulces cósmicos y elefantes dalinianos sobre el agua.
+            </div>
+          </div>
+        </div>
+
+        <!-- CAPÍTULO II (NUEVO) -->
+        <div class="art-card">
+          <img src="assets/images/capitulo2_el_duelo_alquimico.jpg" alt="Capítulo II: El Duelo Alquímico">
+          <div class="art-card-body">
+            <div class="art-card-title">Capítulo II: El Duelo Alquímico de la Encrucijada</div>
+            <div class="art-card-desc">
+              Taiwo y Kehinde transmutando la tierra agrietada en oro líquido con el tambor de glifos solares, icosaedros flotantes y la Muerte danzando.
+            </div>
+          </div>
+        </div>
+
+        <!-- ESCENA DANZA DE IKÚ -->
+        <div class="art-card">
+          <img src="assets/images/escena_danza_muerte.jpg" alt="Danza de la Muerte">
+          <div class="art-card-body">
+            <div class="art-card-title">Capítulo III: El Vals Inmortal de Ikú</div>
+            <div class="art-card-desc">
+              La Muerte atrapada en un baile hipnótico en el manglar infinito mientras los gemelos se turnan sobre el tronco sagrado.
+            </div>
+          </div>
+        </div>
+
+        <!-- ESCENA APOTEOSIS -->
+        <div class="art-card">
+          <img src="assets/images/escena_eres_lluvia_dulces.jpg" alt="Lluvia de Dulces">
+          <div class="art-card-body">
+            <div class="art-card-title">Capítulo IV: La Cascada Cósmica de los Erês</div>
+            <div class="art-card-desc">
+              La victoria final donde la inocencia disuelve la pesadez del mundo bajo una lluvia de caramelos y mariposas de Macondo.
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- TAB: LORE / PEDAGOGÍA (APRENDER MÁS) -->
+  <div id="tab-lore" class="tab-content" style="display: none;">
+    <div class="panel">
+      <div class="panel-header">
+        <div class="panel-title">💡 ¿De qué va todo este tema? (Guía para Entender y Aprender)</div>
+      </div>
+
+      <div class="story-box">
+        <strong>La Esencia del Proyecto:</strong><br>
+        Este proyecto nace de unir **tres fuerzas poderosas**: las historias que te contó **Alanna** sobre la religión afrobrasileña de la Umbanda, la cosmovisión yoruba de los gemelos sagrados (**Ibeji**), y el poder narrativo del **Realismo Mágico latinoamericano** (Gabriel García Márquez) junto al arte surrealista.
+      </div>
+
+      <div class="grid-2">
+        <div class="info-card">
+          <div class="card-title">🍭 1. ¿Por qué la Lluvia de Dulces y Caramelos?</div>
+          <div class="card-desc">
+            En la Umbanda, los espíritus infantiles (**Erês**) y los santos gemelos (**Cosme, Damián y Doum**) no aceptan sacrificios de sangre ni riquezas materiales. Su único "alimento" espiritual son los **dulces, la miel, las frutas y las sonrisas**. El dulce representa la <em>pureza sin malicia</em>: la medicina que endulza las amarguras de la vida adulta.
+          </div>
+        </div>
+
+        <div class="info-card">
+          <div class="card-title">🐘 2. ¿Por qué los Elefantes con Zancos en el Agua?</div>
+          <div class="card-desc">
+            Inspirados en la famosa pintura de Salvador Dalí, los elefantes gigantescos caminando sobre patas finas como agujas sobre el agua representan **los problemas pesados de la vida volviéndose livianos**. Nos recuerda que cuando nos conectamos con la fe y la alegría, las cargas más pesadas dejan de hundirnos.
+          </div>
+        </div>
+
+        <div class="info-card">
+          <div class="card-title">🦋 3. Las Mariposas Amarillas de Gabo</div>
+          <div class="card-desc">
+            En el Realismo Mágico de *Cien años de soledad*, las mariposas amarillas son el presagio de los milagros, el amor puro y lo sobrenatural que convive con lo cotidiano. En este proyecto, simbolizan la presencia invisible pero constante de la protección ancestral.
+          </div>
+        </div>
+
+        <div class="info-card">
+          <div class="card-title">🥁 4. La Inteligencia sobre la Fuerza Bruta</div>
+          <div class="card-desc">
+            El mito de los Ibejis enseña que para vencer a la Muerte no hizo falta un ejército ni violencia. Hizo falta **dos hermanos unidos, un tambor y la inteligencia de turnarse**. Es la lección de que el trabajo en equipo y el entusiasmo vencen a cualquier adversidad.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 1: IBEJI -->
+  <div id="tab-ibeji" class="tab-content" style="display: none;">
+    <div class="panel">
+      <div class="panel-header">
+        <div class="panel-title">🥁 Los Ibejis: Los Gemelos Sagrados y la Derrota de la Muerte</div>
+      </div>
+
+      <div class="story-box">
+        <strong>El Gran Patakí del Tambor Mágico:</strong><br>
+        En la mitología yoruba, la Muerte (<em>Ikú</em>) había colocado trampas invisibles por todos los senderos para atrapar a la humanidad. Viendo el terror de su pueblo, los pequeños gemelos <strong>Taiwo</strong> ("el que prueba el mundo primero") y <strong>Kehinde</strong> ("el mayor que llega después") desafiaron a la Muerte con un tambor mágico inagotable. Mientras uno tocaba bailando frenéticamente frente a la Muerte, el otro descansaba oculto en la espesura. Al turnarse sin parar, agotaron a la Muerte hasta que esta se rindió y juró retirar sus trampas y respetar a los niños.
+      </div>
+
+      <div class="grid-3">
+        <div class="info-card">
+          <div class="card-icon">🎭</div>
+          <div class="card-title">Taiwo & Kehinde</div>
+          <div class="card-desc">
+            Representan la <strong>dualidad perfecta</strong>, la sincronía y la complementariedad. Donde uno abre camino, el otro consolida la sabiduría.
+          </div>
+        </div>
+
+        <div class="info-card">
+          <div class="card-icon">🕊️</div>
+          <div class="card-title">San Cosme y San Damián</div>
+          <div class="card-desc">
+            El sincretismo en Brasil asoció a los Ibejis con los santos hermanos médicos. El <strong>27 de septiembre</strong> se celebra su gran fiesta repartiendo dulces a todos los niños.
+          </div>
+        </div>
+
+        <div class="info-card">
+          <div class="card-icon">🌟</div>
+          <div class="card-title">Doum (El 3º Hermano)</div>
+          <div class="card-desc">
+            En la Umbanda, <strong>Doum</strong> representa al niño que nace después de los gemelos, trayendo paz, reconciliación y completitud al ciclo sagrado.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 2: UMBANDA -->
+  <div id="tab-umbanda" class="tab-content" style="display: none;">
+    <div class="panel">
+      <div class="panel-header">
+        <div class="panel-title">🌿 La Filosofía de la Umbanda: Caridad y Fraternidad</div>
+      </div>
+
+      <p style="color: #cbd5e1; line-height: 1.7; margin-bottom: 1.25rem; font-size: 0.92rem;">
+        Fundada el <strong>15 de noviembre de 1908</strong> por <strong>Zélio Fernandino de Moraes</strong> guiado por el <em>Caboclo das Sete Encruzilhadas</em>, la Umbanda es la religión genuina de Brasil sustentada en un lema inviolable: <strong>"La manifestación del espíritu para la caridad"</strong>. Toda ayuda espiritual es enteramente gratuita y se viste de blanco como símbolo de que todos somos iguales ante Dios (Zambi).
+      </p>
+
+      <div class="grid-3">
+        <div class="info-card">
+          <div class="card-icon">🏹</div>
+          <div class="card-title">Caboclos</div>
+          <div class="card-desc">
+            Espíritus indígenas de la selva. Maestros de la medicina natural, el coraje, la purificación y la fuerza espiritual.
+          </div>
+        </div>
+
+        <div class="info-card">
+          <div class="card-icon">👴🏾</div>
+          <div class="card-title">Pretos Velhos</div>
+          <div class="card-desc">
+            Ancianos africanos llenos de sabiduría, paciencia, perdón y compasión. Sanadores de penas profundas del alma.
+          </div>
+        </div>
+
+        <div class="info-card">
+          <div class="card-icon">🌊</div>
+          <div class="card-title">Marinheiros</div>
+          <div class="card-desc">
+            Espíritus de las aguas que limpian densidades emocionales y ayudan al ser humano a mantener el equilibrio en las tempestades de la vida.
+          </div>
+        </div>
+
+        <div class="info-card">
+          <div class="card-icon">🥥</div>
+          <div class="card-title">Baianos</div>
+          <div class="card-desc">
+            Entidades de Bahía caracterizadas por la alegría desbordante, el desenfado, la lealtad y el poder de romper bloqueos energéticos.
+          </div>
+        </div>
+
+        <div class="info-card">
+          <div class="card-icon">🐂</div>
+          <div class="card-title">Boiadeiros</div>
+          <div class="card-desc">
+            Hombres del campo y pastores. Guías de la disciplina, el trabajo arduo, la firmeza y el rescate de almas extraviadas.
+          </div>
+        </div>
+
+        <div class="info-card">
+          <div class="card-icon">🔥</div>
+          <div class="card-title">Exús de Ley</div>
+          <div class="card-desc">
+            Guardianes del orden divino y las encrucijadas. Protectores incansables contra energías densas y abridores de caminos.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 3: ERES -->
+  <div id="tab-eres" class="tab-content" style="display: none;">
+    <div class="panel">
+      <div class="panel-header">
+        <div class="panel-title">🍭 La Falange de los Erês: La Medicina de la Alegría Inocente</div>
+      </div>
+
+      <div class="story-box">
+        En la Umbanda se dice: <em>"No existe maleficio ni dolor que resista la risa pura de un niño"</em>. Los Erês son espíritus de luz de altísima elevación que eligen manifestarse como niños para sanar el corazón de los adultos sin juicios, usando piruletas, flores, cantos y juegos.
+      </div>
+
+      <div class="grid-2">
+        <div class="info-card">
+          <div class="card-title">🍬 Símbolos & Ofrendas Tradicionales</div>
+          <div class="card-desc">
+            <ul style="margin-left: 1.25rem; margin-top: 0.4rem; line-height: 1.7;">
+              <li>Dulces, caramelos, piruletas y pasteles de colores.</li>
+              <li>Guaraná, refrescos y aguas azucaradas con frutas.</li>
+              <li>Flores coloridas (rosas, margaritas) y cintas celestes y rosas.</li>
+              <li>Juguetes y silbatos que simbolizan la pureza del juego.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="info-card">
+          <div class="card-title">✨ Misión Sanadora</div>
+          <div class="card-desc">
+            Los Erês actúan como <strong>desenredadores de nudos energéticos</strong>. Cuando un adulto se siente abrumado por el rencor, la pérdida o la confusión, la energía del Erê disuelve la pesadez recordándole la inocencia y el valor de los placeres sencillos de la vida.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 4: PONTOS CANTADOS -->
+  <div id="tab-pontos" class="tab-content" style="display: none;">
+    <div class="panel">
+      <div class="panel-header">
+        <div class="panel-title">🪘 Pontos Cantados Tradicionales (Cantos Sagrados)</div>
+      </div>
+
+      <div class="grid-2">
+        <div class="ponto-card">
+          <div class="ponto-title">Ponto de Cosme, Damião e Doum</div>
+          Bahia é terra de dois,<br>
+          É terra de dois irmãos.<br>
+          Governador da Bahia,<br>
+          É Cosme e São Damião!<br><br>
+          Cosme e Damião, Damião cadê Doum?<br>
+          Doum está passeando no cavalo de Ogum!
+        </div>
+
+        <div class="ponto-card">
+          <div class="ponto-title">Ponto da Festa das Crianças</div>
+          Tem bala de coco, tem pipoca e cocada,<br>
+          Tem doce de leite pra toda a criançada!<br><br>
+          Papai me mande um balão,<br>
+          Com todas as crianças que vêm lá do céu,<br>
+          Trazendo a pureza de São Cosme e São Damião!
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB GÉNESIS & AMOR EN ARGUELLES: CASSIOPEA & ÓSCULO SID -->
+  <div id="tab-genesis" class="tab-content" style="display: none;">
+    <div class="genesis-hero">
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem;">
+        <span class="tag-movie tag-gabo">✨ Crónica de Amor Alquímico</span>
+        <span style="font-family: var(--font-mono); font-size: 0.78rem; color: var(--accent-gold);">Vive Madrid • El Rincón • Argüelles • 2026</span>
+      </div>
+
+      <h2 style="font-family: var(--font-title); font-size: 1.8rem; color: #fff; margin-bottom: 0.5rem;">
+        EL PACTO SAGRADO: CASSIOPEA & ÓSCULO SID
+      </h2>
+      <div style="font-family: var(--font-title); font-size: 1rem; color: var(--accent-gold); font-style: italic; margin-bottom: 1.25rem;">
+        «La brasileña de rizos que convirtió las noches de Madrid en Macondo.»
+      </div>
+
+      <div class="love-story-quote">
+        “Hay encuentros que no los calcula el azar, sino que vienen trazados en las constelaciones. En el <strong>Vive Madrid</strong> y en <strong>El Rincón</strong> de Argüelles, entre el bullicio de la noche y el pulso subterráneo de la ciudad, apareció ella: <em>la brasileña de rizos negros y risa de sol de la cual me enamoré</em>.
+        <br><br>
+        <strong>A ella le escribo cada poema, cada melodía de guitarra y cada canción.</strong> Es la mujer de mi vida, el amor con el que un día sueño casarme, levantar un hogar sagrado y ver nacer y crecer a nuestros hijos bajo el abrazo protector de los Orixás y la alegría de los Ibejis.
+        <br><br>
+        Allí, entre miradas cómplices, risas compartidas y secretos susurrados sobre la Umbanda, los Erês y los tambores de Bahía, Alanna se convirtió en <strong>Cassiopea ✨🌌</strong>; y Dani en <strong>Ósculo Sid 💫</strong>, sellando el juramento de inmortalizar su amor en una obra de Realismo Mágico para la eternidad.”
+      </div>
+
+      <!-- DUAL CHARACTER CARDS: CASSIOPEA & OSCULO SID -->
+      <div class="character-grid">
+        
+        <!-- CARD CASSIOPEA -->
+        <div class="character-card">
+          <div class="char-avatar">✨🌌</div>
+          <h3 class="char-name">Cassiopea</h3>
+          <div class="char-role">La Brasileña de Rizos • Musa de Poemas & Futura Esposa</div>
+          <p class="char-bio">
+            La musa de rizos infinitos nacida bajo el cielo de Brasil. Destinataria de cada poema, verso y canción; la compañera elegida por el alma para caminar hacia el matrimonio, fundar una familia y florecer en un hogar lleno de hijos y alegría. Trae en su mirada la memoria sagrada de Bahía, la dulzura de los Erês y la caridad luminosa de la Umbanda.
+          </p>
+        </div>
+
+        <!-- CARD ÓSCULO SID -->
+        <div class="character-card">
+          <div class="char-avatar">💫🏛️</div>
+          <h3 class="char-name">Ósculo Sid</h3>
+          <div class="char-role">Quimera Alchemist • Poeta & Arquitecto de Mundos</div>
+          <p class="char-bio">
+            «Ósculo» como el beso sagrado que funde la vida, los poemas y el amor eterno; «Sid» como el demiurgo que toma cada mirada en Argüelles, cada anécdota compartida y cada promesa de futuro para convertirlos en partituras inmortales, cine, código y lienzos de Realismo Mágico.
+          </p>
+        </div>
+
+      </div>
+
+      <!-- LOS 4 PILARES DEL PROYECTO -->
+      <h3 style="font-family: var(--font-title); color: #fff; font-size: 1.2rem; margin-top: 2rem; margin-bottom: 0.5rem;">
+        🏛️ Los 4 Pilares del Universo Ibeji
+      </h3>
+      <p style="color: var(--text-dim); font-size: 0.88rem;">
+        La alquimia que estructura la película, la dirección de arte y la música:
+      </p>
+
+      <div class="pillars-grid">
+        <div class="pillar-card">
+          <div class="pillar-icon">👶🍭</div>
+          <div class="pillar-title">1. Umbanda & Ibejis</div>
+          <div class="pillar-desc">La sabiduría de que la alegría pura y los caramelos son el conjuro más poderoso para desarmar a la muerte (Ikú).</div>
+        </div>
+
+        <div class="pillar-card">
+          <div class="pillar-icon">🦋📖</div>
+          <div class="pillar-title">2. Gabriel García Márquez</div>
+          <div class="pillar-desc">El Realismo Mágico de Macondo: enjambres de mariposas amarillas vivas que surgen de las aguas y susurran profecías.</div>
+        </div>
+
+        <div class="pillar-card">
+          <div class="pillar-icon">🐘🎨</div>
+          <div class="pillar-title">3. Salvador Dalí</div>
+          <div class="pillar-desc">Surrealismo onírico: elefantes dalinianos con patas de zancos infinitas que caminan ligeros sobre el mar al atardecer.</div>
+        </div>
+
+        <div class="pillar-card">
+          <div class="pillar-icon">🐋🎵</div>
+          <div class="pillar-title">4. Bossa Nova & Natalia</div>
+          <div class="pillar-desc">Paisaje sonoro cuántico: guitarras con acordes de Bossa Nova clásica, cantos submarinos de ballenas jorobadas y frecuencias 432 Hz.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- TAB BRAND & MANUAL DE IDENTIDAD VISUAL -->
+  <div id="tab-brand" class="tab-content" style="display: none;">
+    <div class="panel">
+      <div class="panel-header">
+        <div class="panel-title">🎨 Manual Maestro de Identidad Visual & Marca del Amor</div>
+      </div>
+
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem;">
+        <span class="tag-movie tag-gabo">✨ Maison Quintessence • Quimera Alchemist</span>
+        <span style="font-family: var(--font-mono); font-size: 0.78rem; color: var(--accent-gold);">Manual v1.0 • Cassiopea & Ósculo Sid (Cid)</span>
+      </div>
+
+      <p style="color: var(--text-dim); font-size: 0.9rem; line-height: 1.6; margin-bottom: 1.5rem;">
+        Guía de estilo y sistema cromático que define la fusión entre el <strong>Realismo Mágico de Macondo</strong>, el <strong>Surrealismo Daliniano</strong> y la atmósfera <strong>Cyberpunk Alquímica 432 Hz</strong> del amor entre Alanna (<em>Cassiopea ✨🌌</em>) y Dani (<em>Ósculo Sid 💫 / Cid</em>).
+      </p>
+
+      <!-- PALETA CROMÁTICA OFICIAL -->
+      <h3 style="font-family: var(--font-title); color: #fff; font-size: 1.15rem; margin-bottom: 0.75rem; border-bottom: 1px dashed rgba(255,255,255,0.1); padding-bottom: 0.4rem;">
+        🌟 1. Paleta Cromática Oficial (Tokens de Color)
+      </h3>
+
+      <div class="palette-grid">
+        
+        <!-- ORO MACONDO -->
+        <div class="swatch-card">
+          <div class="swatch-color-box" style="background: linear-gradient(135deg, #fef08a, #fbbf24, #b45309); box-shadow: 0 4px 15px rgba(251, 191, 36, 0.35);"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">Oro Macondo</div>
+            <div class="swatch-hex">#FBBF24 • rgb(251, 191, 36)</div>
+            <div class="swatch-desc">Luz primordial de los Ibejis, mariposas amarillas vivas de Mauricio Babilonia y filigrana de oro.</div>
+          </div>
+        </div>
+
+        <!-- CIAN YEMANJÁ -->
+        <div class="swatch-card">
+          <div class="swatch-color-box" style="background: linear-gradient(135deg, #a5f3fc, #38bdf8, #0369a1); box-shadow: 0 4px 15px rgba(56, 189, 248, 0.35);"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">Cian Yemanjá</div>
+            <div class="swatch-hex">#38BDF8 • rgb(56, 189, 248)</div>
+            <div class="swatch-desc">Aguas celestiales de Bahía, alas translúcidas, halos neón cyberpunk y cantos de ballenas.</div>
+          </div>
+        </div>
+
+        <!-- ROSA CASSIOPEA -->
+        <div class="swatch-card">
+          <div class="swatch-color-box" style="background: linear-gradient(135deg, #fbcfe8, #f472b6, #be185d); box-shadow: 0 4px 15px rgba(244, 114, 182, 0.35);"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">Rosa Cassiopea (Oxum)</div>
+            <div class="swatch-hex">#F472B6 • rgb(244, 114, 182)</div>
+            <div class="swatch-desc">El amor romántico en Argüelles, dulzura de los Erês, pétalos de loto flotantes y rizos al atardecer.</div>
+          </div>
+        </div>
+
+        <!-- VIOLETA NEÓN MÍSTICO -->
+        <div class="swatch-card">
+          <div class="swatch-color-box" style="background: linear-gradient(135deg, #e9d5ff, #c084fc, #6b21a8); box-shadow: 0 4px 15px rgba(192, 132, 252, 0.35);"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">Violeta Constelación</div>
+            <div class="swatch-hex">#C084FC • rgb(192, 132, 252)</div>
+            <div class="swatch-desc">Frecuencia de transformación alquímica (528 Hz), metamorfosis mariposa-estrella y noche mística.</div>
+          </div>
+        </div>
+
+        <!-- NOCHE CÓSMICA -->
+        <div class="swatch-card">
+          <div class="swatch-color-box" style="background: #030712; border: 1px solid rgba(255,255,255,0.15);"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">Noche Cósmica (Abismo)</div>
+            <div class="swatch-hex">#030712 • rgb(3, 7, 18)</div>
+            <div class="swatch-desc">Lienzo infinito del universo, profundidad del cielo de Madrid y la laguna sagrada.</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- TIPOGRAFÍAS DE MARCA -->
+      <h3 style="font-family: var(--font-title); color: #fff; font-size: 1.15rem; margin-top: 2rem; margin-bottom: 0.75rem; border-bottom: 1px dashed rgba(255,255,255,0.1); padding-bottom: 0.4rem;">
+        ✒️ 2. Sistema Tipográfico & Jerarquía
+      </h3>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem;">
+        <div class="pillar-card">
+          <div style="font-family: var(--font-title); font-size: 1.3rem; color: var(--accent-gold); margin-bottom: 0.3rem;">Cinzel / Cinzel Decorative</div>
+          <div style="font-size: 0.78rem; color: var(--accent-cyan); font-family: var(--font-mono); margin-bottom: 0.4rem;">TITULARES & REALEZA CINEMATOGRÁFICA</div>
+          <div style="font-size: 0.82rem; color: var(--text-dim);">Mayúsculas de gran porte, remates clásicos y estética de cine de autor y templos sagrados.</div>
+        </div>
+
+        <div class="pillar-card">
+          <div style="font-family: serif; font-style: italic; font-size: 1.3rem; color: #fef08a; margin-bottom: 0.3rem;">Cormorant Garamond (Italic)</div>
+          <div style="font-size: 0.78rem; color: var(--accent-cyan); font-family: var(--font-mono); margin-bottom: 0.4rem;">LÍRICA & POEMAS DE AMOR</div>
+          <div style="font-size: 0.82rem; color: var(--text-dim);">Elegancia manuscrita para citas, votos sagrados y reflexiones íntimas.</div>
+        </div>
+
+        <div class="pillar-card">
+          <div style="font-family: var(--font-mono); font-size: 1.1rem; color: #38bdf8; margin-bottom: 0.3rem;">JetBrains Mono / Fira Code</div>
+          <div style="font-size: 0.78rem; color: var(--accent-cyan); font-family: var(--font-mono); margin-bottom: 0.4rem;">METADATA & FRECUENCIAS CYBERPUNK</div>
+          <div style="font-size: 0.82rem; color: var(--text-dim);">Precisión técnica para acordes musicales, coordenadas estelares y física de partículas.</div>
+        </div>
+      </div>
+
+      <!-- ARQUETIPOS DEL AMOR -->
+      <h3 style="font-family: var(--font-title); color: #fff; font-size: 1.15rem; margin-top: 2rem; margin-bottom: 0.75rem; border-bottom: 1px dashed rgba(255,255,255,0.1); padding-bottom: 0.4rem;">
+        💫 3. Nombres Oficiales y Arquetipos
+      </h3>
+
+      <div class="character-grid" style="margin-top: 1rem;">
+        <div class="character-card">
+          <div class="char-avatar">✨🌌</div>
+          <h4 class="char-name">Cassiopea (Alanna)</h4>
+          <div class="char-role">La Brasileña de Rizos • Musa Sagrada</div>
+          <p class="char-bio">
+            Simbolizada por la constelación 'W' que guía a los marineros en la noche. Representa la gracia de Bahía, la dulzura primordial de los Erês y la visión mística de la caridad pura en la Umbanda.
+          </p>
+        </div>
+
+        <div class="character-card">
+          <div class="char-avatar">💫🏛️</div>
+          <h4 class="char-name">Ósculo Sid / Cid (Dani)</h4>
+          <div class="char-role">Quimera Alchemist • Poeta & Arquitecto</div>
+          <p class="char-bio">
+            «Ósculo» como el beso sagrado inmortal; «Sid / Cid» como el noble arquitecto demiurgo que plasma el amor en música cuántica, partituras de guitarra, cine y tecnología viva.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- TAB 5: JOURNAL / BITACORA -->
+  <div id="tab-journal" class="tab-content" style="display: none;">
+    <div class="panel">
+      <div class="panel-header">
+        <div class="panel-title">📖 Bitácora de Relatos, Enseñanzas y Memorias</div>
+      </div>
+
+      <p style="color: var(--text-dim); margin-bottom: 1rem; font-size: 0.88rem;">
+        Registra aquí los relatos, explicaciones y memorias compartidas por Alanna sobre las tradiciones, rezos y vivencias de la Umbanda para conservarlas en el proyecto.
+      </p>
+
+      <form class="journal-form" onsubmit="saveMemory(event)">
+        <input type="text" id="memoryTitle" class="form-input" placeholder="Título del relato o enseñanza (Ej: Lo que me contó Alanna sobre el 27 de Septiembre)" required>
+        <textarea id="memoryBody" class="form-textarea" rows="3" placeholder="Escribe aquí los detalles del relato, oraciones, recuerdos o reflexiones..." required></textarea>
+        <button type="submit" class="btn-submit">💾 Guardar Relato en la Memoria del Proyecto</button>
+      </form>
+
+      <div id="memoriesList">
+        <!-- Memorias renderizadas dinámicamente -->
+      </div>
+    </div>
+  </div>
+
+  <!-- LUXURY CREATOR & HIGH-TICKET FOOTER (EDITORIAL SIGNATURE SHOWCASE) -->
+  <footer class="luxury-footer">
+    <div class="footer-glow-line"></div>
+
+    <div class="luxury-showcase-card">
+      
+      <!-- HEADER & BRANDING -->
+      <div class="showcase-header">
+        <div class="showcase-brand-badge">HAUTE COUTURE DIGITAL</div>
+        <h3 class="showcase-title">MAISON QUINTESSENCE</h3>
+        <div class="showcase-creator">
+          <span class="creator-label">CREADO POR</span>
+          <a href="https://danisid.com" target="_blank" rel="noopener" class="creator-name-link">DANIEL SID</a>
+          <span class="creator-tag">LEAD CREATIVE TECHNOLOGIST</span>
+        </div>
+        <p class="showcase-tagline">
+          Arquitectura Digital de Alto Impacto, Experiencias WebGL & Interfaces Luxury a Medida.
+        </p>
+      </div>
+
+      <!-- SIMMETRIC ACTION BAR (4 PILLS) -->
+      <div class="showcase-actions-grid">
+        <a href="https://danisid.com" target="_blank" rel="noopener" class="showcase-pill pill-danisid" title="Visitar Portfolio Oficial">
+          <span class="pill-icon">⚡</span>
+          <span class="pill-text">danisid.com</span>
+          <span class="pill-arrow">↗</span>
+        </a>
+
+        <a href="https://maison-quintessence.netlify.app/" target="_blank" rel="noopener" class="showcase-pill pill-maison" title="Visitar Estudio Digital">
+          <span class="pill-icon">🏛️</span>
+          <span class="pill-text">Maison Quintessence</span>
+          <span class="pill-arrow">↗</span>
+        </a>
+
+        <a href="https://wa.me/34641868620?text=Hola%20Daniel,%20he%20visto%20la%20experiencia%20de%20ER%C3%8AS%20y%20me%20gustar%C3%ADa%20hablar%20sobre%20el%20desarrollo%20de%20un%20proyecto%20web%20a%20medida." target="_blank" rel="noopener" class="showcase-pill pill-whatsapp" title="Contactar por WhatsApp">
+          <span class="pill-icon">💬</span>
+          <span class="pill-text">+34 641 86 86 20</span>
+        </a>
+
+        <a href="mailto:garciadanielsid@gmail.com?subject=Consulta%20Proyecto%20Web%20-%20Daniel%20Sid" class="showcase-pill pill-email" title="Enviar Correo Electrónico">
+          <span class="pill-icon">✉️</span>
+          <span class="pill-text">garciadanielsid@gmail.com</span>
+        </a>
+      </div>
+
+    </div>
+
+    <!-- FOOTER BOTTOM LEGAL & CREDITS -->
+    <div class="footer-bottom-bar">
+      <div class="footer-copy">
+        © 2026 <strong>ERÊS</strong> • Realismo Mágico, Cosmos & Alquimia • Madrid, España.
+      </div>
+      <div class="footer-tags">
+        <span>WebGL 60FPS</span> • <span>Audio Procedural</span> • <span>Glassmorphism Luxury</span>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+  // =========================================================================
+  // 1. MOTOR DE CONSTELACIONES, MARIPOSAS CYBERPUNK & METAMORFOSIS (CANVAS)
+  //    Estética: Realismo Mágico Gabo • Cyberpunk Alquímico • Maison Quintessence
+  // =========================================================================
+  const canvas = document.getElementById('magicalCanvas');
+  const ctx = canvas.getContext('2d');
+
+  let width = window.innerWidth;
+  let height = window.innerHeight;
+  let mouse = { x: width / 2, y: height / 2, active: false };
+
+  function resizeCanvas() {
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    width = window.innerWidth;
+    height = window.innerHeight;
+    canvas.width = Math.round(width * dpr);
+    canvas.height = Math.round(height * dpr);
+    canvas.style.width = width + 'px';
+    canvas.style.height = height + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+  window.addEventListener('resize', resizeCanvas);
+  resizeCanvas();
+
+  window.addEventListener('mousemove', (e) => {
+    mouse.x = e.clientX;
+    mouse.y = e.clientY;
+    mouse.active = true;
+  });
+
+  window.addEventListener('touchmove', (e) => {
+    if (e.touches.length > 0) {
+      mouse.x = e.touches[0].clientX;
+      mouse.y = e.touches[0].clientY;
+      mouse.active = true;
+    }
+  }, { passive: true });
+
+
+
+
+    // True 3D Celestial Sphere Engine (Stereographic Projection)
+    // Catalog using precise RA and Dec degrees
+  const constellations = [
+  {
+    "name": "\u2648 ARIES",
+    "color": "251, 146, 60",
+    "glow": 0.85,
+    "stars": [
+      {
+        "id": "Hamal",
+        "ra": 31.79,
+        "dec": 23.46,
+        "mag": 2.01
+      },
+      {
+        "id": "Sheratan",
+        "ra": 28.66,
+        "dec": 20.8,
+        "mag": 2.64
+      },
+      {
+        "id": "Mesarthim",
+        "ra": 27.91,
+        "dec": 19.29,
+        "mag": 3.88
+      }
+    ],
+    "lines": [
+      [
+        "Mesarthim",
+        "Sheratan"
+      ],
+      [
+        "Sheratan",
+        "Hamal"
+      ]
+    ]
+  },
+  {
+    "name": "\u2649 TAURO",
+    "color": "234, 179, 8",
+    "glow": 0.9,
+    "stars": [
+      {
+        "id": "Aldebaran",
+        "ra": 68.98,
+        "dec": 16.51,
+        "mag": 0.85
+      },
+      {
+        "id": "Elnath",
+        "ra": 81.57,
+        "dec": 28.61,
+        "mag": 1.65
+      },
+      {
+        "id": "Alcyone",
+        "ra": 56.87,
+        "dec": 24.11,
+        "mag": 2.87
+      },
+      {
+        "id": "Tianguan",
+        "ra": 84.41,
+        "dec": 21.14,
+        "mag": 3.0
+      },
+      {
+        "id": "Ain",
+        "ra": 67.15,
+        "dec": 19.18,
+        "mag": 3.53
+      },
+      {
+        "id": "Hyadum",
+        "ra": 64.95,
+        "dec": 15.63,
+        "mag": 3.65
+      }
+    ],
+    "lines": [
+      [
+        "Hyadum",
+        "Aldebaran"
+      ],
+      [
+        "Aldebaran",
+        "Ain"
+      ],
+      [
+        "Ain",
+        "Elnath"
+      ],
+      [
+        "Aldebaran",
+        "Tianguan"
+      ],
+      [
+        "Ain",
+        "Hyadum"
+      ]
+    ]
+  },
+  {
+    "name": "\u264a G\u00c9MINIS (IBEJIS)",
+    "color": "251, 191, 36",
+    "glow": 1.0,
+    "stars": [
+      {
+        "id": "Pollux",
+        "ra": 116.33,
+        "dec": 28.03,
+        "mag": 1.14
+      },
+      {
+        "id": "Castor",
+        "ra": 113.65,
+        "dec": 31.89,
+        "mag": 1.58
+      },
+      {
+        "id": "Alhena",
+        "ra": 99.43,
+        "dec": 16.4,
+        "mag": 1.93
+      },
+      {
+        "id": "Wasat",
+        "ra": 108.79,
+        "dec": 21.98,
+        "mag": 3.53
+      },
+      {
+        "id": "Mebsuta",
+        "ra": 100.98,
+        "dec": 25.13,
+        "mag": 3.06
+      },
+      {
+        "id": "Tejat",
+        "ra": 95.74,
+        "dec": 22.51,
+        "mag": 2.87
+      }
+    ],
+    "lines": [
+      [
+        "Castor",
+        "Mebsuta"
+      ],
+      [
+        "Mebsuta",
+        "Tejat"
+      ],
+      [
+        "Pollux",
+        "Wasat"
+      ],
+      [
+        "Wasat",
+        "Alhena"
+      ],
+      [
+        "Castor",
+        "Pollux"
+      ],
+      [
+        "Mebsuta",
+        "Wasat"
+      ]
+    ]
+  },
+  {
+    "name": "\u264b C\u00c1NCER",
+    "color": "56, 189, 248",
+    "glow": 0.8,
+    "stars": [
+      {
+        "id": "Altarf",
+        "ra": 124.13,
+        "dec": 9.19,
+        "mag": 3.52
+      },
+      {
+        "id": "AsellusAustralis",
+        "ra": 131.17,
+        "dec": 18.15,
+        "mag": 3.94
+      },
+      {
+        "id": "AsellusBorealis",
+        "ra": 130.83,
+        "dec": 21.47,
+        "mag": 4.66
+      },
+      {
+        "id": "Acubens",
+        "ra": 134.61,
+        "dec": 11.86,
+        "mag": 4.25
+      },
+      {
+        "id": "IotaCnc",
+        "ra": 131.66,
+        "dec": 28.76,
+        "mag": 3.9
+      }
+    ],
+    "lines": [
+      [
+        "Altarf",
+        "AsellusAustralis"
+      ],
+      [
+        "AsellusAustralis",
+        "AsellusBorealis"
+      ],
+      [
+        "AsellusBorealis",
+        "IotaCnc"
+      ],
+      [
+        "AsellusAustralis",
+        "Acubens"
+      ]
+    ]
+  },
+  {
+    "name": "\u264c LEO",
+    "color": "245, 158, 11",
+    "glow": 0.95,
+    "stars": [
+      {
+        "id": "Regulus",
+        "ra": 152.09,
+        "dec": 11.97,
+        "mag": 1.36
+      },
+      {
+        "id": "Denebola",
+        "ra": 177.26,
+        "dec": 14.57,
+        "mag": 2.14
+      },
+      {
+        "id": "Algieba",
+        "ra": 154.99,
+        "dec": 19.84,
+        "mag": 2.01
+      },
+      {
+        "id": "Zosma",
+        "ra": 168.53,
+        "dec": 20.52,
+        "mag": 2.56
+      },
+      {
+        "id": "AlJabbah",
+        "ra": 151.83,
+        "dec": 16.76,
+        "mag": 3.43
+      },
+      {
+        "id": "Adhafera",
+        "ra": 154.17,
+        "dec": 23.42,
+        "mag": 3.44
+      },
+      {
+        "id": "Rasalas",
+        "ra": 148.19,
+        "dec": 26.01,
+        "mag": 3.88
+      },
+      {
+        "id": "Chertan",
+        "ra": 168.53,
+        "dec": 15.43,
+        "mag": 3.33
+      }
+    ],
+    "lines": [
+      [
+        "Regulus",
+        "AlJabbah"
+      ],
+      [
+        "AlJabbah",
+        "Algieba"
+      ],
+      [
+        "Algieba",
+        "Adhafera"
+      ],
+      [
+        "Adhafera",
+        "Rasalas"
+      ],
+      [
+        "Algieba",
+        "Zosma"
+      ],
+      [
+        "Zosma",
+        "Denebola"
+      ],
+      [
+        "Denebola",
+        "Chertan"
+      ],
+      [
+        "Chertan",
+        "Regulus"
+      ],
+      [
+        "Zosma",
+        "Chertan"
+      ]
+    ]
+  },
+  {
+    "name": "\u264d VIRGO",
+    "color": "167, 139, 250",
+    "glow": 0.85,
+    "stars": [
+      {
+        "id": "Spica",
+        "ra": 201.3,
+        "dec": -11.16,
+        "mag": 0.98
+      },
+      {
+        "id": "Porrima",
+        "ra": 190.43,
+        "dec": -1.45,
+        "mag": 2.74
+      },
+      {
+        "id": "Vindemiatrix",
+        "ra": 195.54,
+        "dec": 10.96,
+        "mag": 2.83
+      },
+      {
+        "id": "Heze",
+        "ra": 203.88,
+        "dec": -0.6,
+        "mag": 3.38
+      },
+      {
+        "id": "Zavijava",
+        "ra": 177.67,
+        "dec": 1.77,
+        "mag": 3.61
+      },
+      {
+        "id": "Zaniah",
+        "ra": 184.98,
+        "dec": -0.67,
+        "mag": 3.89
+      }
+    ],
+    "lines": [
+      [
+        "Zavijava",
+        "Zaniah"
+      ],
+      [
+        "Zaniah",
+        "Porrima"
+      ],
+      [
+        "Porrima",
+        "Vindemiatrix"
+      ],
+      [
+        "Porrima",
+        "Heze"
+      ],
+      [
+        "Heze",
+        "Spica"
+      ]
+    ]
+  },
+  {
+    "name": "\u264e LIBRA",
+    "color": "244, 114, 182",
+    "glow": 0.8,
+    "stars": [
+      {
+        "id": "Zubeneschamali",
+        "ra": 229.25,
+        "dec": -9.38,
+        "mag": 2.61
+      },
+      {
+        "id": "Zubenelgenubi",
+        "ra": 222.72,
+        "dec": -16.04,
+        "mag": 2.75
+      },
+      {
+        "id": "Brachium",
+        "ra": 226.01,
+        "dec": -25.28,
+        "mag": 3.25
+      },
+      {
+        "id": "Zubenelhakrabi",
+        "ra": 233.86,
+        "dec": -14.79,
+        "mag": 3.91
+      }
+    ],
+    "lines": [
+      [
+        "Zubenelgenubi",
+        "Zubeneschamali"
+      ],
+      [
+        "Zubeneschamali",
+        "Zubenelhakrabi"
+      ],
+      [
+        "Zubenelhakrabi",
+        "Brachium"
+      ],
+      [
+        "Brachium",
+        "Zubenelgenubi"
+      ],
+      [
+        "Zubenelgenubi",
+        "Zubenelhakrabi"
+      ]
+    ]
+  },
+  {
+    "name": "\u264f ESCORPIO",
+    "color": "239, 68, 68",
+    "glow": 1.0,
+    "stars": [
+      {
+        "id": "Antares",
+        "ra": 247.35,
+        "dec": -26.43,
+        "mag": 1.06
+      },
+      {
+        "id": "Shaula",
+        "ra": 263.4,
+        "dec": -37.1,
+        "mag": 1.62
+      },
+      {
+        "id": "Sargas",
+        "ra": 264.33,
+        "dec": -43.0,
+        "mag": 1.86
+      },
+      {
+        "id": "Dschubba",
+        "ra": 240.08,
+        "dec": -22.62,
+        "mag": 2.29
+      },
+      {
+        "id": "Graffias",
+        "ra": 241.36,
+        "dec": -19.81,
+        "mag": 2.56
+      },
+      {
+        "id": "Wei",
+        "ra": 250.42,
+        "dec": -34.3,
+        "mag": 2.29
+      },
+      {
+        "id": "Fang",
+        "ra": 239.71,
+        "dec": -26.11,
+        "mag": 2.89
+      },
+      {
+        "id": "Larawag",
+        "ra": 254.89,
+        "dec": -42.36,
+        "mag": 3.0
+      },
+      {
+        "id": "Lesath",
+        "ra": 262.69,
+        "dec": -37.29,
+        "mag": 2.69
+      }
+    ],
+    "lines": [
+      [
+        "Graffias",
+        "Dschubba"
+      ],
+      [
+        "Dschubba",
+        "Fang"
+      ],
+      [
+        "Dschubba",
+        "Antares"
+      ],
+      [
+        "Antares",
+        "Wei"
+      ],
+      [
+        "Wei",
+        "Larawag"
+      ],
+      [
+        "Larawag",
+        "Sargas"
+      ],
+      [
+        "Sargas",
+        "Shaula"
+      ],
+      [
+        "Shaula",
+        "Lesath"
+      ]
+    ]
+  },
+  {
+    "name": "\ud83c\udff9 SAGITARIO (LA TETERA)",
+    "color": "168, 85, 247",
+    "glow": 0.95,
+    "stars": [
+      {
+        "id": "KausAustralis",
+        "ra": 276.04,
+        "dec": -34.38,
+        "mag": 1.79
+      },
+      {
+        "id": "Nunki",
+        "ra": 283.82,
+        "dec": -26.3,
+        "mag": 2.05
+      },
+      {
+        "id": "Ascella",
+        "ra": 285.4,
+        "dec": -29.88,
+        "mag": 2.59
+      },
+      {
+        "id": "KausMedia",
+        "ra": 275.2,
+        "dec": -29.83,
+        "mag": 2.72
+      },
+      {
+        "id": "KausBorealis",
+        "ra": 276.99,
+        "dec": -25.42,
+        "mag": 2.82
+      },
+      {
+        "id": "Alnasl",
+        "ra": 271.46,
+        "dec": -30.42,
+        "mag": 2.98
+      },
+      {
+        "id": "PhiSgr",
+        "ra": 281.42,
+        "dec": -27.0,
+        "mag": 3.17
+      },
+      {
+        "id": "TauSgr",
+        "ra": 286.72,
+        "dec": -27.68,
+        "mag": 3.32
+      }
+    ],
+    "lines": [
+      [
+        "Alnasl",
+        "KausMedia"
+      ],
+      [
+        "Alnasl",
+        "KausAustralis"
+      ],
+      [
+        "KausMedia",
+        "KausBorealis"
+      ],
+      [
+        "KausBorealis",
+        "PhiSgr"
+      ],
+      [
+        "PhiSgr",
+        "KausMedia"
+      ],
+      [
+        "KausMedia",
+        "KausAustralis"
+      ],
+      [
+        "KausAustralis",
+        "Ascella"
+      ],
+      [
+        "Ascella",
+        "PhiSgr"
+      ],
+      [
+        "PhiSgr",
+        "Nunki"
+      ],
+      [
+        "Nunki",
+        "TauSgr"
+      ],
+      [
+        "TauSgr",
+        "Ascella"
+      ]
+    ]
+  },
+  {
+    "name": "\u2651 CAPRICORNIO",
+    "color": "59, 130, 246",
+    "glow": 0.8,
+    "stars": [
+      {
+        "id": "DenebAlgedi",
+        "ra": 326.76,
+        "dec": -16.13,
+        "mag": 2.85
+      },
+      {
+        "id": "Dabih",
+        "ra": 305.25,
+        "dec": -14.78,
+        "mag": 3.05
+      },
+      {
+        "id": "Algedi",
+        "ra": 304.4,
+        "dec": -12.54,
+        "mag": 3.58
+      },
+      {
+        "id": "Nashira",
+        "ra": 325.0,
+        "dec": -16.66,
+        "mag": 3.69
+      },
+      {
+        "id": "OmegaCap",
+        "ra": 312.9,
+        "dec": -26.92,
+        "mag": 4.12
+      }
+    ],
+    "lines": [
+      [
+        "Algedi",
+        "Dabih"
+      ],
+      [
+        "Dabih",
+        "OmegaCap"
+      ],
+      [
+        "OmegaCap",
+        "Nashira"
+      ],
+      [
+        "Nashira",
+        "DenebAlgedi"
+      ],
+      [
+        "Dabih",
+        "DenebAlgedi"
+      ]
+    ]
+  },
+  {
+    "name": "\u2652 ACUARIO",
+    "color": "6, 182, 212",
+    "glow": 0.8,
+    "stars": [
+      {
+        "id": "Sadalsuud",
+        "ra": 322.89,
+        "dec": -5.57,
+        "mag": 2.9
+      },
+      {
+        "id": "Sadalmelik",
+        "ra": 331.45,
+        "dec": -0.32,
+        "mag": 2.95
+      },
+      {
+        "id": "Skat",
+        "ra": 343.67,
+        "dec": -15.82,
+        "mag": 3.27
+      },
+      {
+        "id": "Albali",
+        "ra": 311.98,
+        "dec": -9.5,
+        "mag": 3.78
+      },
+      {
+        "id": "Ancha",
+        "ra": 334.23,
+        "dec": -7.78,
+        "mag": 4.17
+      }
+    ],
+    "lines": [
+      [
+        "Albali",
+        "Sadalsuud"
+      ],
+      [
+        "Sadalsuud",
+        "Sadalmelik"
+      ],
+      [
+        "Sadalmelik",
+        "Ancha"
+      ],
+      [
+        "Ancha",
+        "Skat"
+      ]
+    ]
+  },
+  {
+    "name": "\u2653 PISCIS",
+    "color": "14, 165, 233",
+    "glow": 0.8,
+    "stars": [
+      {
+        "id": "Alrescha",
+        "ra": 30.51,
+        "dec": 2.76,
+        "mag": 3.82
+      },
+      {
+        "id": "Fumalsamakah",
+        "ra": 345.96,
+        "dec": 3.82,
+        "mag": 4.48
+      },
+      {
+        "id": "Linteum",
+        "ra": 12.21,
+        "dec": 7.59,
+        "mag": 4.44
+      },
+      {
+        "id": "Torcular",
+        "ra": 26.33,
+        "dec": 9.16,
+        "mag": 4.27
+      }
+    ],
+    "lines": [
+      [
+        "Fumalsamakah",
+        "Linteum"
+      ],
+      [
+        "Linteum",
+        "Torcular"
+      ],
+      [
+        "Torcular",
+        "Alrescha"
+      ]
+    ]
+  },
+  {
+    "name": "\u2694\ufe0f ORI\u00d3N",
+    "color": "56, 189, 248",
+    "glow": 1.0,
+    "stars": [
+      {
+        "id": "Rigel",
+        "ra": 78.63,
+        "dec": -8.2,
+        "mag": 0.18
+      },
+      {
+        "id": "Betelgeuse",
+        "ra": 88.79,
+        "dec": 7.41,
+        "mag": 0.45
+      },
+      {
+        "id": "Bellatrix",
+        "ra": 81.28,
+        "dec": 6.35,
+        "mag": 1.64
+      },
+      {
+        "id": "Alnilam",
+        "ra": 84.05,
+        "dec": -1.2,
+        "mag": 1.69
+      },
+      {
+        "id": "Alnitak",
+        "ra": 85.19,
+        "dec": -1.94,
+        "mag": 1.74
+      },
+      {
+        "id": "Saiph",
+        "ra": 86.94,
+        "dec": -9.67,
+        "mag": 2.07
+      },
+      {
+        "id": "Mintaka",
+        "ra": 83.0,
+        "dec": -0.3,
+        "mag": 2.25
+      },
+      {
+        "id": "Meissa",
+        "ra": 83.78,
+        "dec": 9.93,
+        "mag": 3.39
+      }
+    ],
+    "lines": [
+      [
+        "Meissa",
+        "Betelgeuse"
+      ],
+      [
+        "Meissa",
+        "Bellatrix"
+      ],
+      [
+        "Betelgeuse",
+        "Bellatrix"
+      ],
+      [
+        "Bellatrix",
+        "Mintaka"
+      ],
+      [
+        "Mintaka",
+        "Alnilam"
+      ],
+      [
+        "Alnilam",
+        "Alnitak"
+      ],
+      [
+        "Betelgeuse",
+        "Alnitak"
+      ],
+      [
+        "Alnitak",
+        "Saiph"
+      ],
+      [
+        "Mintaka",
+        "Rigel"
+      ],
+      [
+        "Saiph",
+        "Rigel"
+      ]
+    ]
+  },
+  {
+    "name": "\ud83d\udc51 CASSIOPEA",
+    "color": "244, 114, 182",
+    "glow": 1.0,
+    "stars": [
+      {
+        "id": "Schedar",
+        "ra": 10.13,
+        "dec": 56.54,
+        "mag": 2.24
+      },
+      {
+        "id": "Caph",
+        "ra": 2.29,
+        "dec": 59.15,
+        "mag": 2.28
+      },
+      {
+        "id": "GammaCas",
+        "ra": 14.18,
+        "dec": 60.72,
+        "mag": 2.15
+      },
+      {
+        "id": "Ruchbah",
+        "ra": 21.45,
+        "dec": 60.23,
+        "mag": 2.68
+      },
+      {
+        "id": "Segin",
+        "ra": 26.11,
+        "dec": 63.67,
+        "mag": 3.35
+      }
+    ],
+    "lines": [
+      [
+        "Caph",
+        "Schedar"
+      ],
+      [
+        "Schedar",
+        "GammaCas"
+      ],
+      [
+        "GammaCas",
+        "Ruchbah"
+      ],
+      [
+        "Ruchbah",
+        "Segin"
+      ]
+    ]
+  },
+  {
+    "name": "\u271d\ufe0f CRUZ DEL SUR",
+    "color": "251, 191, 36",
+    "glow": 1.0,
+    "stars": [
+      {
+        "id": "Acrux",
+        "ra": 186.65,
+        "dec": -63.1,
+        "mag": 0.77
+      },
+      {
+        "id": "Mimosa",
+        "ra": 191.93,
+        "dec": -59.69,
+        "mag": 1.25
+      },
+      {
+        "id": "Gacrux",
+        "ra": 187.79,
+        "dec": -57.11,
+        "mag": 1.59
+      },
+      {
+        "id": "Imai",
+        "ra": 183.76,
+        "dec": -58.75,
+        "mag": 2.79
+      }
+    ],
+    "lines": [
+      [
+        "Gacrux",
+        "Acrux"
+      ],
+      [
+        "Imai",
+        "Mimosa"
+      ]
+    ]
+  },
+  {
+    "name": "\ud83d\udc3b OSA MAYOR (EL CARRO)",
+    "color": "59, 130, 246",
+    "glow": 0.95,
+    "stars": [
+      {
+        "id": "Alioth",
+        "ra": 193.51,
+        "dec": 55.96,
+        "mag": 1.76
+      },
+      {
+        "id": "Dubhe",
+        "ra": 165.93,
+        "dec": 61.75,
+        "mag": 1.81
+      },
+      {
+        "id": "Alkaid",
+        "ra": 206.89,
+        "dec": 49.31,
+        "mag": 1.85
+      },
+      {
+        "id": "Mizar",
+        "ra": 200.98,
+        "dec": 54.92,
+        "mag": 2.23
+      },
+      {
+        "id": "Merak",
+        "ra": 165.46,
+        "dec": 56.38,
+        "mag": 2.34
+      },
+      {
+        "id": "Phecda",
+        "ra": 178.46,
+        "dec": 53.69,
+        "mag": 2.41
+      },
+      {
+        "id": "Megrez",
+        "ra": 183.86,
+        "dec": 57.03,
+        "mag": 3.32
+      }
+    ],
+    "lines": [
+      [
+        "Dubhe",
+        "Merak"
+      ],
+      [
+        "Merak",
+        "Phecda"
+      ],
+      [
+        "Phecda",
+        "Megrez"
+      ],
+      [
+        "Megrez",
+        "Dubhe"
+      ],
+      [
+        "Megrez",
+        "Alioth"
+      ],
+      [
+        "Alioth",
+        "Mizar"
+      ],
+      [
+        "Mizar",
+        "Alkaid"
+      ]
+    ]
+  },
+  {
+    "name": "\ud83d\udc15 CAN MAYOR (SIRIO)",
+    "color": "147, 197, 253",
+    "glow": 1.0,
+    "stars": [
+      {
+        "id": "Sirius",
+        "ra": 101.29,
+        "dec": -16.72,
+        "mag": -1.46
+      },
+      {
+        "id": "Adhara",
+        "ra": 104.66,
+        "dec": -28.97,
+        "mag": 1.5
+      },
+      {
+        "id": "Wezen",
+        "ra": 107.1,
+        "dec": -26.39,
+        "mag": 1.83
+      },
+      {
+        "id": "Mirzam",
+        "ra": 95.68,
+        "dec": -17.96,
+        "mag": 1.98
+      },
+      {
+        "id": "Aludra",
+        "ra": 111.02,
+        "dec": -29.3,
+        "mag": 2.45
+      }
+    ],
+    "lines": [
+      [
+        "Mirzam",
+        "Sirius"
+      ],
+      [
+        "Sirius",
+        "Wezen"
+      ],
+      [
+        "Wezen",
+        "Adhara"
+      ],
+      [
+        "Wezen",
+        "Aludra"
+      ]
+    ]
+  },
+  {
+    "name": "\ud83e\udda2 CISNE (CRUZ DEL NORTE)",
+    "color": "192, 132, 252",
+    "glow": 0.95,
+    "stars": [
+      {
+        "id": "Deneb",
+        "ra": 310.36,
+        "dec": 45.28,
+        "mag": 1.25
+      },
+      {
+        "id": "Sadr",
+        "ra": 305.56,
+        "dec": 40.26,
+        "mag": 2.23
+      },
+      {
+        "id": "Gienah",
+        "ra": 311.55,
+        "dec": 33.97,
+        "mag": 2.48
+      },
+      {
+        "id": "Fawaris",
+        "ra": 296.24,
+        "dec": 45.13,
+        "mag": 2.86
+      },
+      {
+        "id": "Albireo",
+        "ra": 292.68,
+        "dec": 27.96,
+        "mag": 3.05
+      }
+    ],
+    "lines": [
+      [
+        "Deneb",
+        "Sadr"
+      ],
+      [
+        "Sadr",
+        "Albireo"
+      ],
+      [
+        "Fawaris",
+        "Sadr"
+      ],
+      [
+        "Sadr",
+        "Gienah"
+      ]
+    ]
+  },
+  {
+    "name": "\ud83e\udd85 \u00c1GUILA (ALTAIR)",
+    "color": "251, 191, 36",
+    "glow": 0.95,
+    "stars": [
+      {
+        "id": "Altair",
+        "ra": 297.7,
+        "dec": 8.87,
+        "mag": 0.77
+      },
+      {
+        "id": "Tarazed",
+        "ra": 296.54,
+        "dec": 10.61,
+        "mag": 2.72
+      },
+      {
+        "id": "Alshain",
+        "ra": 298.83,
+        "dec": 6.41,
+        "mag": 3.71
+      }
+    ],
+    "lines": [
+      [
+        "Tarazed",
+        "Altair"
+      ],
+      [
+        "Altair",
+        "Alshain"
+      ]
+    ]
+  },
+  {
+    "name": "\ud83e\ude95 LIRA (VEGA)",
+    "color": "167, 139, 250",
+    "glow": 1.0,
+    "stars": [
+      {
+        "id": "Vega",
+        "ra": 279.23,
+        "dec": 38.78,
+        "mag": 0.03
+      },
+      {
+        "id": "Sulafat",
+        "ra": 284.74,
+        "dec": 32.69,
+        "mag": 3.25
+      },
+      {
+        "id": "Sheliak",
+        "ra": 282.52,
+        "dec": 33.36,
+        "mag": 3.52
+      },
+      {
+        "id": "DeltaLyr",
+        "ra": 283.78,
+        "dec": 36.9,
+        "mag": 4.3
+      },
+      {
+        "id": "ZetaLyr",
+        "ra": 281.2,
+        "dec": 37.6,
+        "mag": 4.34
+      }
+    ],
+    "lines": [
+      [
+        "Vega",
+        "ZetaLyr"
+      ],
+      [
+        "ZetaLyr",
+        "DeltaLyr"
+      ],
+      [
+        "DeltaLyr",
+        "Sulafat"
+      ],
+      [
+        "Sulafat",
+        "Sheliak"
+      ],
+      [
+        "Sheliak",
+        "ZetaLyr"
+      ]
+    ]
+  },
+  {
+    "name": "\ud83d\udc0e PEGASO (GRAN CUADRADO)",
+    "color": "56, 189, 248",
+    "glow": 0.9,
+    "stars": [
+      {
+        "id": "Alpheratz",
+        "ra": 2.1,
+        "dec": 29.09,
+        "mag": 2.07
+      },
+      {
+        "id": "Scheat",
+        "ra": 345.94,
+        "dec": 28.08,
+        "mag": 2.44
+      },
+      {
+        "id": "Markab",
+        "ra": 346.18,
+        "dec": 15.21,
+        "mag": 2.49
+      },
+      {
+        "id": "Algenib",
+        "ra": 2.17,
+        "dec": 15.18,
+        "mag": 2.84
+      },
+      {
+        "id": "Enif",
+        "ra": 326.05,
+        "dec": 9.87,
+        "mag": 2.38
+      },
+      {
+        "id": "Homam",
+        "ra": 340.3,
+        "dec": 10.83,
+        "mag": 3.41
+      }
+    ],
+    "lines": [
+      [
+        "Alpheratz",
+        "Scheat"
+      ],
+      [
+        "Scheat",
+        "Markab"
+      ],
+      [
+        "Markab",
+        "Algenib"
+      ],
+      [
+        "Algenib",
+        "Alpheratz"
+      ],
+      [
+        "Markab",
+        "Homam"
+      ],
+      [
+        "Homam",
+        "Enif"
+      ]
+    ]
+  },
+  {
+    "name": "\ud83d\udc34 CENTAURO",
+    "color": "234, 179, 8",
+    "glow": 0.95,
+    "stars": [
+      {
+        "id": "AlphaCen",
+        "ra": 219.9,
+        "dec": -60.83,
+        "mag": -0.01
+      },
+      {
+        "id": "Hadar",
+        "ra": 210.96,
+        "dec": -60.37,
+        "mag": 0.61
+      },
+      {
+        "id": "Menkent",
+        "ra": 211.7,
+        "dec": -36.37,
+        "mag": 2.06
+      },
+      {
+        "id": "Muhlifain",
+        "ra": 190.99,
+        "dec": -48.96,
+        "mag": 2.2
+      }
+    ],
+    "lines": [
+      [
+        "AlphaCen",
+        "Hadar"
+      ],
+      [
+        "Hadar",
+        "Muhlifain"
+      ],
+      [
+        "Muhlifain",
+        "Menkent"
+      ]
+    ]
+  },
+  {
+    "name": "\ud83d\udc09 DRAG\u00d3N",
+    "color": "52, 211, 153",
+    "glow": 0.85,
+    "stars": [
+      {
+        "id": "Eltanin",
+        "ra": 269.15,
+        "dec": 51.49,
+        "mag": 2.24
+      },
+      {
+        "id": "Rastaban",
+        "ra": 262.61,
+        "dec": 52.3,
+        "mag": 2.79
+      },
+      {
+        "id": "Grumium",
+        "ra": 268.35,
+        "dec": 56.87,
+        "mag": 3.75
+      },
+      {
+        "id": "Thuban",
+        "ra": 211.1,
+        "dec": 64.38,
+        "mag": 3.67
+      }
+    ],
+    "lines": [
+      [
+        "Eltanin",
+        "Rastaban"
+      ],
+      [
+        "Rastaban",
+        "Grumium"
+      ],
+      [
+        "Grumium",
+        "Eltanin"
+      ],
+      [
+        "Grumium",
+        "Thuban"
+      ]
+    ]
+  },
+  {
+    "name": "\ud83d\udea2 CARINA (CANOPUS)",
+    "color": "244, 114, 182",
+    "glow": 1.0,
+    "stars": [
+      {
+        "id": "Canopus",
+        "ra": 95.99,
+        "dec": -52.7,
+        "mag": -0.74
+      },
+      {
+        "id": "Miaplacidus",
+        "ra": 138.3,
+        "dec": -69.72,
+        "mag": 1.67
+      },
+      {
+        "id": "Avior",
+        "ra": 125.63,
+        "dec": -59.51,
+        "mag": 1.86
+      },
+      {
+        "id": "Aspidiske",
+        "ra": 139.75,
+        "dec": -59.28,
+        "mag": 2.21
+      }
+    ],
+    "lines": [
+      [
+        "Canopus",
+        "Avior"
+      ],
+      [
+        "Avior",
+        "Aspidiske"
+      ],
+      [
+        "Aspidiske",
+        "Miaplacidus"
+      ]
+    ]
+  },
+  {
+    "name": "\ud83d\udc1f PEZ AUSTRAL (FOMALHAUT)",
+    "color": "56, 189, 248",
+    "glow": 0.9,
+    "stars": [
+      {
+        "id": "Fomalhaut",
+        "ra": 344.41,
+        "dec": -29.62,
+        "mag": 1.17
+      },
+      {
+        "id": "DeltaPsA",
+        "ra": 341.25,
+        "dec": -32.54,
+        "mag": 4.2
+      },
+      {
+        "id": "EpsilonPsA",
+        "ra": 340.16,
+        "dec": -27.04,
+        "mag": 4.18
+      }
+    ],
+    "lines": [
+      [
+        "Fomalhaut",
+        "DeltaPsA"
+      ],
+      [
+        "DeltaPsA",
+        "EpsilonPsA"
+      ],
+      [
+        "EpsilonPsA",
+        "Fomalhaut"
+      ]
+    ]
+  },
+  {
+    "name": "\ud83d\udc0b CETUS",
+    "color": "96, 165, 250",
+    "glow": 0.85,
+    "stars": [
+      {
+        "id": "Diphda",
+        "ra": 10.9,
+        "dec": -17.99,
+        "mag": 2.04
+      },
+      {
+        "id": "Menkar",
+        "ra": 45.57,
+        "dec": 4.09,
+        "mag": 2.54
+      },
+      {
+        "id": "BatenKaitos",
+        "ra": 28.53,
+        "dec": -10.33,
+        "mag": 3.74
+      },
+      {
+        "id": "Mira",
+        "ra": 34.84,
+        "dec": -2.98,
+        "mag": 3.04
+      }
+    ],
+    "lines": [
+      [
+        "Menkar",
+        "Mira"
+      ],
+      [
+        "Mira",
+        "BatenKaitos"
+      ],
+      [
+        "BatenKaitos",
+        "Diphda"
+      ]
+    ]
+  },
+  {
+    "name": "\ud83d\udd25 F\u00c9NIX",
+    "color": "249, 115, 22",
+    "glow": 0.85,
+    "stars": [
+      {
+        "id": "Ankaa",
+        "ra": 6.57,
+        "dec": -42.31,
+        "mag": 2.4
+      },
+      {
+        "id": "Wurid",
+        "ra": 17.58,
+        "dec": -46.72,
+        "mag": 3.32
+      },
+      {
+        "id": "GammaPhe",
+        "ra": 23.36,
+        "dec": -43.32,
+        "mag": 3.41
+      }
+    ],
+    "lines": [
+      [
+        "Ankaa",
+        "Wurid"
+      ],
+      [
+        "Wurid",
+        "GammaPhe"
+      ],
+      [
+        "GammaPhe",
+        "Ankaa"
+      ]
+    ]
+  },
+  {
+    "name": "\ud83d\udc0d OFIUCO",
+    "color": "167, 139, 250",
+    "glow": 0.85,
+    "stars": [
+      {
+        "id": "Rasalhague",
+        "ra": 263.73,
+        "dec": 12.56,
+        "mag": 2.08
+      },
+      {
+        "id": "Sabik",
+        "ra": 257.59,
+        "dec": -15.72,
+        "mag": 2.43
+      },
+      {
+        "id": "Han",
+        "ra": 249.29,
+        "dec": -10.57,
+        "mag": 2.54
+      },
+      {
+        "id": "Cebalrai",
+        "ra": 265.87,
+        "dec": 4.57,
+        "mag": 2.76
+      },
+      {
+        "id": "YedPrior",
+        "ra": 243.6,
+        "dec": -3.69,
+        "mag": 2.73
+      }
+    ],
+    "lines": [
+      [
+        "Rasalhague",
+        "Cebalrai"
+      ],
+      [
+        "Cebalrai",
+        "Sabik"
+      ],
+      [
+        "Sabik",
+        "Han"
+      ],
+      [
+        "Han",
+        "YedPrior"
+      ],
+      [
+        "YedPrior",
+        "Rasalhague"
+      ]
+    ]
+  },
+  {
+    "name": "\ud83d\udee1\ufe0f ESCUDO",
+    "color": "251, 191, 36",
+    "glow": 0.8,
+    "stars": [
+      {
+        "id": "AlphaSct",
+        "ra": 280.93,
+        "dec": -8.24,
+        "mag": 3.85
+      },
+      {
+        "id": "BetaSct",
+        "ra": 281.76,
+        "dec": -4.75,
+        "mag": 4.22
+      },
+      {
+        "id": "DeltaSct",
+        "ra": 280.6,
+        "dec": -9.05,
+        "mag": 4.7
+      }
+    ],
+    "lines": [
+      [
+        "AlphaSct",
+        "BetaSct"
+      ],
+      [
+        "BetaSct",
+        "DeltaSct"
+      ],
+      [
+        "DeltaSct",
+        "AlphaSct"
+      ]
+    ]
+  },
+  {
+    "name": "\ud83e\udd9a PAVO",
+    "color": "45, 212, 191",
+    "glow": 0.85,
+    "stars": [
+      {
+        "id": "Peacock",
+        "ra": 306.41,
+        "dec": -56.73,
+        "mag": 1.94
+      },
+      {
+        "id": "BetaPav",
+        "ra": 312.38,
+        "dec": -66.2,
+        "mag": 3.42
+      },
+      {
+        "id": "GammaPav",
+        "ra": 318.05,
+        "dec": -65.36,
+        "mag": 4.21
+      }
+    ],
+    "lines": [
+      [
+        "Peacock",
+        "BetaPav"
+      ],
+      [
+        "BetaPav",
+        "GammaPav"
+      ]
+    ]
+  }
+];
+  // 1.1 UBICACIONES SAGRADAS & COORDENADAS CELESTES REALES
+  const SACRED_LOCATIONS = {
+    madrid: {
+      name: "Madrid",
+      flag: "🇪🇸",
+      lat: 40.4168,
+      lon: -3.7038,
+      desc: "Hogar & Templo en Argüelles"
+    },
+    bahia: {
+      name: "Bahía",
+      flag: "🇧🇷",
+      lat: -12.9777,
+      lon: -38.5016,
+      desc: "Cielo de Cassiopea ✨🌌"
+    },
+    manizales: {
+      name: "Manizales",
+      flag: "🇨🇴",
+      lat: 5.0689,
+      lon: -75.5174,
+      desc: "Cielo de Ósculo Sid 💫 & Adrián"
+    }
+  };
+
+  let activeLocationKey = "madrid";
+  let currentLat = SACRED_LOCATIONS.madrid.lat;
+  let targetLat = SACRED_LOCATIONS.madrid.lat;
+  let currentLon = SACRED_LOCATIONS.madrid.lon;
+  let targetLon = SACRED_LOCATIONS.madrid.lon;
+
+  // 1.2 Cálculo de Tiempo Sidéreo Local (LST) Astronómico Real
+  function getLocalSiderealTime(lonDeg, date = new Date()) {
+    const time = date.getTime();
+    const jd = (time / 86400000.0) + 2440587.5;
+    const d = jd - 2451545.0;
+    let gmst = 280.46061837 + 360.98564736629 * d;
+    gmst = ((gmst % 360) + 360) % 360;
+    let lst = gmst + lonDeg;
+    return ((lst % 360) + 360) % 360;
+  }
+
+  const isMobile = window.innerWidth <= 768;
+  const numBgStars = isMobile ? 140 : 320;
+
+  // 1.3 Estrellas de Fondo Distribuidas en la Esfera Celeste
+  const bgStars = Array.from({ length: numBgStars }, () => ({
+    ra: Math.random() * 360,
+    dec: (Math.random() * 180) - 90,
+    mag: 1.5 + Math.random() * 4.8,
+    color: ["#ffffff", "#fef08a", "#38bdf8", "#f472b6", "#c084fc"][Math.floor(Math.random() * 5)],
+    twinkleOffset: Math.random() * Math.PI * 2,
+    twinkleSpeed: 1.2 + Math.random() * 2.5
+  }));
+
+  // Nube de la Vía Láctea (Plano Galáctico)
+  const milkyWayNodes = Array.from({ length: isMobile ? 40 : 90 }, (_, i) => {
+    const t = (i / (isMobile ? 40 : 90)) * Math.PI * 2;
+    const ra = (t * 180 / Math.PI + 280) % 360;
+    const dec = Math.sin(t) * 62.8 + (Math.random() - 0.5) * 12;
+    return { ra, dec, size: 35 + Math.random() * 45, alpha: 0.04 + Math.random() * 0.06 };
+  });
+
+  window.skySettings = { rotation: true, lines: true, names: true };
+
+  // Variables de navegación astronómica esférica 1:1
+  let targetPanRA = 0;
+  let targetPanDec = 0;
+  let currentPanRA = 0;
+  let currentPanDec = 0;
+
+  let targetSkyZoom = 1.0;
+  let currentSkyZoom = 1.0;
+
+  let isDraggingSky = false;
+  let lastMouseX = 0;
+  let lastMouseY = 0;
+
+  let siderealElapsed = 0;
+  let lastSkyTime = performance.now();
+
+  function drawConstellations() {
+    const now = performance.now();
+    const dt = Math.min(0.1, (now - lastSkyTime) / 1000);
+    lastSkyTime = now;
+    const time = now * 0.001;
+
+    // Transición suave entre ubicaciones sagradas (Madrid / Bahía / Manizales)
+    currentLat += (targetLat - currentLat) * 0.08;
+    currentLon += (targetLon - currentLon) * 0.08;
+
+    // Interpolación suave del Zoom
+    currentSkyZoom += (targetSkyZoom - currentSkyZoom) * 0.12;
+
+    // Suavizado e inercia cinemática en los ángulos de visión esféricos
+    currentPanRA += (targetPanRA - currentPanRA) * 0.15;
+    currentPanDec += (targetPanDec - currentPanDec) * 0.15;
+
+    // Velocidad de rotación inteligente de la Tierra:
+    // En modo lectura: 0.04°/s (ultra-suave y contemplativo)
+    // En modo Zen: 0.18°/s (flujo sideral inmersivo)
+    const isZen = document.body.classList.contains("zen-active");
+    const rotationSpeed = isZen ? 0.18 : 0.04;
+    if (window.skySettings.rotation) {
+      siderealElapsed += dt * rotationSpeed;
+    }
+
+    // Tiempo Sidéreo Local Base calculado con precisión astronómica IAU
+    const baseLST = getLocalSiderealTime(currentLon);
+    
+    // Coordenadas esféricas del centro de visión (Orientación Stellarium Natural)
+    let centerRA = (baseLST + siderealElapsed - currentPanRA) % 360;
+    if (centerRA < 0) centerRA += 360;
+
+    let centerDec = Math.max(-75, Math.min(75, currentLat + currentPanDec));
+
+    const ra0 = centerRA * (Math.PI / 180);
+    const dec0 = centerDec * (Math.PI / 180);
+    const sinDec0 = Math.sin(dec0);
+    const cosDec0 = Math.cos(dec0);
+
+    // Escala All-Sky calibrada para cubrir siempre el 100% de la pantalla sin huecos vacíos
+    const baseRadius = Math.hypot(width, height) * 0.28 * currentSkyZoom;
+    const cx = width * 0.5;
+    const cy = height * 0.5;
+    const zoomFactor = Math.max(0.70, Math.min(1.5, Math.sqrt(currentSkyZoom)));
+
+    // Proyección Estereográfica All-Sky de Alta Eficiencia
+    function project(raDeg, decDeg) {
+      const ra = raDeg * (Math.PI / 180);
+      const dec = decDeg * (Math.PI / 180);
+      const sinDec = Math.sin(dec);
+      const cosDec = Math.cos(dec);
+      const dRa = ra - ra0;
+      const cosDRa = Math.cos(dRa);
+
+      // Distancia angular al centro de visión
+      const cosC = sinDec0 * sinDec + cosDec0 * cosDec * cosDRa;
+      
+      // Permitir ver hasta el horizonte completo (cosC >= -0.15)
+      if (cosC <= -0.15) return null;
+
+      const k = 2 / (1 + Math.max(0, cosC));
+      const px = cx - (k * cosDec * Math.sin(dRa) * baseRadius);
+      const py = cy - (k * (cosDec0 * sinDec - sinDec0 * cosDec * cosDRa) * baseRadius);
+
+      return { x: px, y: py, cosC: Math.max(0, cosC) };
+    }
+
+    // 1. DIBUJAR LA VÍA LÁCTEA (PLANO GALÁCTICO TRANSLÚCIDO)
+    ctx.save();
+    milkyWayNodes.forEach(node => {
+      const p = project(node.ra, node.dec);
+      if (!p || p.cosC <= 0.02) return;
+      const r = node.size * (isMobile ? 0.7 : 1.0) * zoomFactor;
+      const grad = ctx.createRadialGradient(p.x, p.y, 2, p.x, p.y, r);
+      grad.addColorStop(0, `rgba(186, 230, 253, ${node.alpha * p.cosC * 1.5})`);
+      grad.addColorStop(0.5, `rgba(147, 197, 253, ${node.alpha * p.cosC * 0.8})`);
+      grad.addColorStop(1, "rgba(0, 0, 0, 0)");
+      ctx.fillStyle = grad;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, r, 0, Math.PI * 2);
+      ctx.fill();
+    });
+    ctx.restore();
+
+    // 2. DIBUJAR ESTRELLAS DE FONDO PARPADEANTES
+    ctx.save();
+    bgStars.forEach(star => {
+      const p = project(star.ra, star.dec);
+      if (!p || p.cosC <= 0.01) return;
+
+      const twinkle = 0.55 + Math.sin(time * star.twinkleSpeed + star.twinkleOffset) * 0.35;
+      const size = Math.max(0.6, (6.8 - star.mag) * (isMobile ? 0.32 : 0.40) * zoomFactor);
+      const alpha = Math.min(0.9, Math.max(0.12, (7.0 - star.mag) / 6.0)) * twinkle * (0.3 + p.cosC * 0.7);
+
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, size, 0, Math.PI * 2);
+      ctx.fillStyle = star.color;
+      ctx.globalAlpha = alpha;
+      ctx.fill();
+    });
+    ctx.restore();
+
+    // 3. DIBUJAR LAS 30 CONSTELACIONES COMPLETAS (IAU)
+    constellations.forEach(c => {
+      const starPoints = {};
+      let totalX = 0;
+      let totalY = 0;
+      let visibleCount = 0;
+      let totalCosC = 0;
+
+      c.stars.forEach(s => {
+        const p = project(s.ra, s.dec);
+        if (p) {
+          starPoints[s.id] = p;
+          totalX += p.x;
+          totalY += p.y;
+          totalCosC += p.cosC;
+          visibleCount++;
+        }
+      });
+
+      if (visibleCount < 2) return;
+
+      const avgX = totalX / visibleCount;
+      const avgY = totalY / visibleCount;
+      const avgCosC = totalCosC / visibleCount;
+
+      // Desvanecimiento suave en el horizonte
+      const constellationAlpha = Math.min(1.0, Math.max(0.0, avgCosC * 2.2 + 0.15));
+      if (constellationAlpha <= 0.02) return;
+
+      const pulse = 0.88 + Math.sin(time * 1.8 + avgX * 0.02) * 0.12;
+      const globalVisAlpha = constellationAlpha * pulse;
+
+      // A. Líneas de Filigrana Celeste
+      if (window.skySettings.lines) {
+        ctx.save();
+        ctx.beginPath();
+        c.lines.forEach(line => {
+          const p1 = starPoints[line[0]];
+          const p2 = starPoints[line[1]];
+          if (p1 && p2) {
+            ctx.moveTo(p1.x, p1.y);
+            ctx.lineTo(p2.x, p2.y);
+          }
+        });
+        ctx.strokeStyle = `rgba(${c.color}, ${0.65 * globalVisAlpha})`;
+        ctx.lineWidth = (isMobile ? 0.9 : 1.1) * zoomFactor;
+        ctx.stroke();
+        ctx.restore();
+      }
+
+      // B. Estrellas de la Constelación con Centelleo
+      ctx.save();
+      c.stars.forEach(s => {
+        const p = starPoints[s.id];
+        if (!p) return;
+
+        const starTwinkle = 0.8 + Math.sin(time * 3.2 + s.ra * 0.2) * 0.2;
+        const magSize = Math.max(1.1, (5.8 - s.mag) * (isMobile ? 0.65 : 0.80) * zoomFactor);
+        const starAlpha = Math.min(1.0, Math.max(0.35, (6.2 - s.mag) / 5.0)) * globalVisAlpha * starTwinkle;
+
+        // Halo
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, magSize * 2.2, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${c.color}, ${starAlpha * 0.35})`;
+        ctx.fill();
+
+        // Núcleo
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, magSize, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255, 255, 255, ${starAlpha})`;
+        ctx.fill();
+
+        // Destello de 4 puntas en estrellas de 1ª magnitud
+        if (s.mag < 2.0 && !isMobile) {
+          const spikeLen = magSize * 2.4 * starTwinkle;
+          ctx.beginPath();
+          ctx.moveTo(p.x - spikeLen, p.y);
+          ctx.lineTo(p.x + spikeLen, p.y);
+          ctx.moveTo(p.x, p.y - spikeLen);
+          ctx.lineTo(p.x, p.y + spikeLen);
+          ctx.strokeStyle = `rgba(255, 255, 255, ${starAlpha * 0.65})`;
+          ctx.lineWidth = 0.75;
+          ctx.stroke();
+        }
+      });
+      ctx.restore();
+
+      // C. Nombres de las Constelaciones
+      if (window.skySettings.names) {
+        ctx.save();
+        const fontSize = Math.round((isMobile ? 9 : 10.5) * zoomFactor);
+        ctx.font = `${fontSize}px "Cinzel", serif`;
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillStyle = `rgba(255, 255, 255, ${0.85 * globalVisAlpha})`;
+        ctx.shadowColor = `rgb(${c.color})`;
+        ctx.shadowBlur = 6;
+        ctx.fillText(c.name, avgX, avgY - (isMobile ? 14 : 18) * zoomFactor);
+        ctx.restore();
+      }
+    });
+  }
+
+  // --- ZOOM SUAVE Y PRECISO (CONTROL FLUIDO) ---
+  window.addEventListener("wheel", (e) => {
+    if (e.target.closest(".content-wrapper, .art-card, .audio-panel, .simulator-panel, textarea, input")) return;
+    const zoomDelta = e.deltaY * -0.0012;
+    targetSkyZoom = Math.max(0.70, Math.min(2.0, targetSkyZoom + zoomDelta));
+  }, { passive: true });
+
+  // --- GESTOS TÁCTILES PELLIZCO (PINCH-TO-ZOOM) ---
+  let initialPinchDist = null;
+  let initialPinchZoom = 1.0;
+
+  window.addEventListener("touchstart", (e) => {
+    if (e.touches.length === 2) {
+      initialPinchDist = Math.hypot(
+        e.touches[0].clientX - e.touches[1].clientX,
+        e.touches[0].clientY - e.touches[1].clientY
+      );
+      initialPinchZoom = targetSkyZoom;
+    } else if (e.touches.length === 1) {
+      if (e.target.closest(".content-wrapper, .control-btn, .sky-location-bar, .zen-btn, .art-card, .audio-panel, button, a")) return;
+      isDraggingSky = true;
+      lastMouseX = e.touches[0].clientX;
+      lastMouseY = e.touches[0].clientY;
+    }
+  }, { passive: true });
+
+  // --- INTERACCIÓN 1:1 GRAB-TO-PAN ESFÉRICO INTUITIVO (STELLARIUM STYLE) ---
+  window.addEventListener("mousedown", (e) => {
+    if (e.target.closest(".content-wrapper, .control-btn, .sky-location-bar, .zen-btn, .art-card, .audio-panel, button, a")) return;
+    isDraggingSky = true;
+    lastMouseX = e.clientX;
+    lastMouseY = e.clientY;
+  });
+
+  window.addEventListener("mousemove", (e) => {
+    if (isDraggingSky) {
+      const dx = (e.clientX - lastMouseX);
+      const dy = (e.clientY - lastMouseY);
+      
+      // Arrastre esférico natural: mover a la derecha gira hacia la derecha
+      const sensitivity = 75.0 / (Math.min(width, height) * currentSkyZoom);
+      targetPanRA += dx * sensitivity;
+      targetPanDec += dy * sensitivity;
+      
+      // Limitar declinación vertical para evitar inversión polar
+      targetPanDec = Math.max(-65, Math.min(65, targetPanDec));
+
+      lastMouseX = e.clientX;
+      lastMouseY = e.clientY;
+    }
+  });
+
+  window.addEventListener("mouseup", () => { isDraggingSky = false; });
+  window.addEventListener("mouseleave", () => { isDraggingSky = false; });
+
+  window.addEventListener("touchmove", (e) => {
+    if (e.touches.length === 2 && initialPinchDist !== null) {
+      const currentDist = Math.hypot(
+        e.touches[0].clientX - e.touches[1].clientX,
+        e.touches[0].clientY - e.touches[1].clientY
+      );
+      const factor = currentDist / initialPinchDist;
+      targetSkyZoom = Math.max(0.70, Math.min(2.0, initialPinchZoom * factor));
+    } else if (isDraggingSky && e.touches.length === 1) {
+      const dx = (e.touches[0].clientX - lastMouseX);
+      const dy = (e.touches[0].clientY - lastMouseY);
+      
+      const sensitivity = 75.0 / (Math.min(width, height) * currentSkyZoom);
+      targetPanRA += dx * sensitivity;
+      targetPanDec += dy * sensitivity;
+      targetPanDec = Math.max(-65, Math.min(65, targetPanDec));
+
+      lastMouseX = e.touches[0].clientX;
+      lastMouseY = e.touches[0].clientY;
+    }
+  }, { passive: true });
+
+  window.addEventListener("touchend", (e) => {
+    if (e.touches.length < 2) initialPinchDist = null;
+    if (e.touches.length === 0) isDraggingSky = false;
+  });
+
+  // Función para orientar la vista suavemente hacia una constelación específica
+  window.lookAtConstellation = function(constellationName) {
+    const target = constellations.find(c => c.name.toLowerCase().includes(constellationName.toLowerCase()));
+    if (!target || target.stars.length === 0) return;
+    
+    // Calcular centro RA / Dec de la constelación
+    let totalRA = 0, totalDec = 0;
+    target.stars.forEach(s => { totalRA += s.ra; totalDec += s.dec; });
+    const avgRA = totalRA / target.stars.length;
+    const avgDec = totalDec / target.stars.length;
+
+    const baseLST = getLocalSiderealTime(currentLon);
+    let desiredPanRA = (baseLST + siderealElapsed - avgRA) % 360;
+    if (desiredPanRA > 180) desiredPanRA -= 360;
+    if (desiredPanRA < -180) desiredPanRA += 360;
+
+    targetPanRA = desiredPanRA;
+    targetPanDec = avgDec - currentLat;
+    targetPanDec = Math.max(-65, Math.min(65, targetPanDec));
+
+    if (typeof showToast === "function") {
+      showToast(`🎯 Orientando vista hacia: ${target.name}`);
+    }
+  };
+
+  // Función para cambiar de ubicación sagrada con animación
+  window.setSkyLocation = function(locKey) {
+    if (!SACRED_LOCATIONS[locKey]) return;
+    activeLocationKey = locKey;
+    targetLat = SACRED_LOCATIONS[locKey].lat;
+    targetLon = SACRED_LOCATIONS[locKey].lon;
+
+    document.querySelectorAll(".loc-btn").forEach(btn => {
+      btn.classList.toggle("active", btn.dataset.loc === locKey);
+    });
+
+    const labelEl = document.getElementById("skyBarCurrentLabel");
+    if (labelEl) {
+      labelEl.innerText = `🌌 Cielo: ${SACRED_LOCATIONS[locKey].flag} ${SACRED_LOCATIONS[locKey].name}`;
+    }
+
+    if (typeof showToast === "function") {
+      showToast(`🌌 Perspectiva Celeste: ${SACRED_LOCATIONS[locKey].flag} ${SACRED_LOCATIONS[locKey].name} (${SACRED_LOCATIONS[locKey].desc})`);
+    }
+  };
+
+  // Listeners de los controles sagrados y toggle colapsable
+  document.addEventListener("DOMContentLoaded", () => {
+    const skyBar = document.getElementById("skyLocationBar");
+    const toggleBtn = document.getElementById("skyBarToggleBtn");
+
+    if (toggleBtn && skyBar) {
+      toggleBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        skyBar.classList.toggle("collapsed");
+      });
+    }
+
+    document.querySelectorAll(".loc-btn").forEach(btn => {
+      btn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        window.setSkyLocation(btn.dataset.loc);
+      });
+    });
+
+    const constPicker = document.getElementById("constellationPicker");
+    if (constPicker) {
+      constPicker.addEventListener("change", (e) => {
+        if (e.target.value) {
+          window.lookAtConstellation(e.target.value);
+        }
+      });
+    }
+
+    const toggleRotate = document.getElementById("toggleRotate");
+    const toggleLines = document.getElementById("toggleLines");
+    const toggleNames = document.getElementById("toggleNames");
+
+    if (toggleRotate) {
+      toggleRotate.addEventListener("click", (e) => {
+        e.stopPropagation();
+        window.skySettings.rotation = !window.skySettings.rotation;
+        toggleRotate.classList.toggle("active", window.skySettings.rotation);
+      });
+    }
+
+    if (toggleLines) {
+      toggleLines.addEventListener("click", (e) => {
+        e.stopPropagation();
+        window.skySettings.lines = !window.skySettings.lines;
+        toggleLines.classList.toggle("active", window.skySettings.lines);
+      });
+    }
+
+    if (toggleNames) {
+      toggleNames.addEventListener("click", (e) => {
+        e.stopPropagation();
+        window.skySettings.names = !window.skySettings.names;
+        toggleNames.classList.toggle("active", window.skySettings.names);
+      });
+    }
+  });
+
+  // =========================================================================
+  // 🦋 MOTOR MAESTRO DE MARIPOSAS DE MACONDO & METAMORFOSIS A CONSTELACIONES (ORIGINAL)
+  // =========================================================================
+  const PALETTES = [
+    // 1. Oro Macondo Alquímico
+    { type: "macondo", core: "#ffffff", mid: "#fde047", amber: "#f59e0b", dark: "#78350f", outline: "#451a03", neon: "#fbbf24" },
+    // 2. Cian Eléctrico Yemanjá (Cyberpunk)
+    { type: "yemanja", core: "#ffffff", mid: "#a5f3fc", amber: "#38bdf8", dark: "#0369a1", outline: "#082f49", neon: "#38bdf8" },
+    // 3. Rosa & Violeta Cassiopea (Oxum)
+    { type: "cassiopea", core: "#ffffff", mid: "#fbcfe8", amber: "#f472b6", dark: "#c084fc", outline: "#581c87", neon: "#f472b6" },
+    // 4. Cristal Cuántico Translúcido
+    { type: "quantum", core: "#ffffff", mid: "#e0e7ff", amber: "#818cf8", dark: "#4338ca", outline: "#1e1b4b", neon: "#c084fc" }
+  ];
+
+  const stardustParticles = [];
+
+  class Stardust {
+    constructor(x, y, color = "#fde047") {
+      this.x = x + (Math.random() - 0.5) * 8;
+      this.y = y + (Math.random() - 0.5) * 8;
+      this.size = 1.2 + Math.random() * 2.4;
+      this.vx = (Math.random() - 0.5) * 0.8;
+      this.vy = 0.2 + Math.random() * 0.7;
+      this.alpha = 0.95;
+      this.decay = 0.012 + Math.random() * 0.018;
+      this.color = color;
+    }
+
+    update() {
+      this.x += this.vx;
+      this.y += this.vy;
+      this.alpha -= this.decay;
+    }
+
+    draw() {
+      if (this.alpha <= 0) return;
+      ctx.save();
+      ctx.globalAlpha = this.alpha;
+      ctx.fillStyle = this.color;
+      ctx.shadowColor = this.color;
+      ctx.shadowBlur = 8;
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+    }
+  }
+
+  // --- DULCES CÓSMICOS DE LOS ERÊS ---
+  class CosmicSweet {
+    constructor() { this.reset(true); }
+
+    reset(initial = false) {
+      this.x = Math.random() * width;
+      this.y = initial ? Math.random() * height : -20;
+      this.size = 2.2 + Math.random() * 3.2;
+      this.speedY = 0.3 + Math.random() * 0.6;
+      this.speedX = (Math.random() - 0.5) * 0.3;
+      this.color = ["#f472b6", "#38bdf8", "#fbbf24", "#c084fc", "#34d399"][Math.floor(Math.random() * 5)];
+      this.alpha = 0.3 + Math.random() * 0.45;
+      this.rotation = Math.random() * Math.PI * 2;
+      this.rotSpeed = (Math.random() - 0.5) * 0.02;
+    }
+
+    update() {
+      this.y += this.speedY;
+      this.x += this.speedX + Math.sin(this.y * 0.01) * 0.4;
+      this.rotation += this.rotSpeed;
+      if (this.y > height + 20) this.reset(false);
+    }
+
+    draw() {
+      ctx.save();
+      ctx.translate(this.x, this.y);
+      ctx.rotate(this.rotation);
+      ctx.globalAlpha = this.alpha;
+      ctx.fillStyle = this.color;
+      ctx.shadowColor = this.color;
+      ctx.shadowBlur = 6;
+      ctx.beginPath();
+      ctx.arc(0, 0, this.size, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+    }
+  }
+
+  // --- MARIPOSAS CYBERPUNK ALQUÍMICAS & METAMORFOSIS A CONSTELACIONES ---
+  class AlchemicalMacondoButterfly {
+    constructor(customX = null, customY = null) {
+      this.reset(true, customX, customY);
+    }
+
+    reset(initial = false, customX = null, customY = null) {
+      this.x = customX !== null ? customX : (initial ? Math.random() * width : (Math.random() < 0.5 ? -60 : width + 60));
+      this.y = customY !== null ? customY : Math.random() * height;
+      this.z = 0.35 + Math.random() * 0.75;
+      this.scale = (16 + Math.random() * 14) * this.z;
+
+      // Velocidades dinámicas para sensación ágil y viva
+      this.speed = (1.2 + Math.random() * 2.2) * this.z;
+      this.angle = Math.random() * Math.PI * 2;
+      this.vx = Math.cos(this.angle) * this.speed;
+      this.vy = Math.sin(this.angle) * this.speed;
+
+      this.flapPhase = Math.random() * Math.PI * 2;
+      this.flapSpeed = 0.16 + Math.random() * 0.30;
+      this.glideTimer = 0;
+      this.isGliding = false;
+      this.scaredTimer = 0;
+      this.noiseOffset = Math.random() * 1000;
+      this.bankAngle = 0;
+
+      // Estado de Metamorfosis a Constelación (Dormida en red geométrica)
+      this.isConstellation = false;
+      this.constellationTimer = 0;
+
+      this.palette = PALETTES[Math.floor(Math.random() * PALETTES.length)];
+    }
+
+    scare(originX, originY, force = 8.5) {
+      const dx = this.x - originX;
+      const dy = this.y - originY;
+      const dist = Math.max(15, Math.sqrt(dx * dx + dy * dy));
+      this.vx = (dx / dist) * (force + Math.random() * 4.0);
+      this.vy = (dy / dist) * (force + Math.random() * 4.0) - 1.5;
+      this.angle = Math.atan2(this.vy, this.vx);
+      this.scaredTimer = 50;
+      this.isGliding = false;
+      this.isConstellation = false;
+      this.flapSpeed = 0.42;
+    }
+
+    wake() {
+      this.isConstellation = false;
+      this.constellationTimer = 0;
+      this.flapSpeed = 0.35 + Math.random() * 0.2;
+      this.speed = (1.8 + Math.random() * 2.0) * this.z;
+    }
+
+    update() {
+      this.noiseOffset += 0.016;
+
+      // Evento aleatorio: metamorfosis a constelación estelar (quedarse dormida)
+      if (!this.isConstellation && !this.isGliding && this.scaredTimer === 0 && Math.random() < 0.0018) {
+        this.isConstellation = true;
+        this.constellationTimer = 220 + Math.random() * 100; // ~4 a 5 segundos
+      }
+
+      if (this.isConstellation) {
+        this.constellationTimer--;
+        this.vx *= 0.94;
+        this.vy *= 0.94;
+        this.flapSpeed = 0.05;
+
+        // Desprender chispas estelares
+        if (Math.random() < 0.4) {
+          stardustParticles.push(new Stardust(this.x, this.y, this.palette.neon));
+        }
+
+        if (this.constellationTimer <= 0) {
+          this.isConstellation = false;
+          this.flapSpeed = 0.20 + Math.random() * 0.25;
+          this.speed = (1.2 + Math.random() * 2.2) * this.z;
+        }
+      } else if (this.scaredTimer > 0) {
+        this.scaredTimer--;
+        this.vx *= 0.95;
+        this.vy *= 0.95;
+        if (this.scaredTimer === 0) {
+          this.flapSpeed = 0.16 + Math.random() * 0.30;
+        }
+      } else {
+        const wander = Math.sin(this.noiseOffset) * 0.14;
+        this.angle += wander;
+
+        const targetVx = Math.cos(this.angle) * this.speed;
+        const targetVy = Math.sin(this.angle) * this.speed + Math.sin(this.noiseOffset * 2) * 0.4;
+
+        this.vx += (targetVx - this.vx) * 0.09;
+        this.vy += (targetVy - this.vy) * 0.09;
+
+        // Evasión / despertar con el ratón
+        if (mouse.active) {
+          const dx = mouse.x - this.x;
+          const dy = mouse.y - this.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 180) {
+            const repel = (1 - dist / 180) * 1.8;
+            this.vx -= (dx / dist) * repel;
+            this.vy -= (dy / dist) * repel;
+            this.flapSpeed = 0.38;
+            if (this.isConstellation) this.wake();
+          }
+        }
+
+        // Modo planeo al descender
+        if (this.vy > 0.3 && Math.random() < 0.025 && !this.isGliding) {
+          this.isGliding = true;
+          this.glideTimer = 35 + Math.random() * 50;
+        }
+        if (this.isGliding) {
+          this.glideTimer--;
+          if (this.glideTimer <= 0) this.isGliding = false;
+        }
+      }
+
+      this.x += this.vx;
+      this.y += this.vy;
+
+      const currentHeading = Math.atan2(this.vy, this.vx);
+      let diff = currentHeading - this.angle;
+      while (diff < -Math.PI) diff += Math.PI * 2;
+      while (diff > Math.PI) diff -= Math.PI * 2;
+      this.angle += diff * 0.14;
+      this.bankAngle = Math.max(-0.45, Math.min(0.45, diff * 2.4));
+
+      if (this.isGliding) {
+        this.flapPhase += 0.04;
+      } else {
+        this.flapPhase += this.flapSpeed;
+      }
+
+      // Desprendimiento de polvo de oro/neón
+      if (Math.random() < 0.35 * this.z) {
+        stardustParticles.push(new Stardust(this.x, this.y, this.palette.mid));
+      }
+
+      if (this.x < -90 || this.x > width + 90 || this.y < -90 || this.y > height + 90) {
+        this.reset(false);
+      }
+    }
+
+    draw() {
+      ctx.save();
+      ctx.translate(this.x, this.y);
+      ctx.rotate(this.angle + Math.PI / 2);
+      ctx.rotate(this.bankAngle);
+
+      const zScale = this.z;
+      const baseW = this.scale;
+      const baseH = this.scale * 1.35;
+
+      let wingSpan = Math.cos(this.flapPhase);
+      if (this.isGliding || this.isConstellation) wingSpan = 0.85 + Math.sin(this.flapPhase) * 0.08;
+      const absSpan = Math.max(0.08, Math.abs(wingSpan));
+      const wingFlex = Math.sin(this.flapPhase) * 0.16;
+
+      // Metamorfosis a constelación (malla estelar luminosa)
+      if (this.isConstellation) {
+        ctx.globalAlpha = 0.95;
+        ctx.shadowColor = this.palette.neon;
+        ctx.shadowBlur = 18 * zScale;
+
+        for (let dir of [-1, 1]) {
+          ctx.save();
+          ctx.scale(dir * absSpan, 1.0);
+
+          ctx.strokeStyle = this.palette.neon;
+          ctx.lineWidth = 1.2 * zScale;
+
+          // Perímetro estelar
+          ctx.beginPath();
+          ctx.moveTo(0, 0);
+          ctx.lineTo(baseW * 1.15, -baseH * 0.7);
+          ctx.lineTo(baseW * 0.95, baseH * 0.15);
+          ctx.lineTo(baseW * 0.7, baseH * 0.85);
+          ctx.lineTo(0, baseH * 0.4);
+          ctx.closePath();
+          ctx.stroke();
+
+          // Nodos estelares en vértices
+          const nodes = [
+            [baseW * 1.15, -baseH * 0.7],
+            [baseW * 0.95, baseH * 0.15],
+            [baseW * 0.7, baseH * 0.85],
+            [0, 0]
+          ];
+          nodes.forEach(([nx, ny]) => {
+            ctx.fillStyle = "#ffffff";
+            ctx.beginPath();
+            ctx.arc(nx, ny, 2.2 * zScale, 0, Math.PI * 2);
+            ctx.fill();
+          });
+
+          ctx.restore();
+        }
+
+        // Núcleo estelar
+        ctx.fillStyle = "#ffffff";
+        ctx.beginPath();
+        ctx.arc(0, 0, 3.5 * zScale, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.restore();
+        return;
+      }
+
+      // Renderizado Vectorial Orgánico Translúcido
+      ctx.globalAlpha = Math.min(0.92, 0.40 + this.z * 0.55);
+      ctx.shadowColor = this.palette.amber;
+      ctx.shadowBlur = 12 * zScale;
+
+      for (let dir of [-1, 1]) {
+        ctx.save();
+        ctx.scale(dir * absSpan, 1.0 + (wingSpan < 0 ? -wingFlex : wingFlex));
+
+        // --- ALA ANTERIOR ---
+        const fwGrad = ctx.createRadialGradient(0, 0, 2, baseW * 0.6, -baseH * 0.4, baseW);
+        fwGrad.addColorStop(0, this.palette.core);
+        fwGrad.addColorStop(0.3, this.palette.mid);
+        fwGrad.addColorStop(0.75, this.palette.amber);
+        fwGrad.addColorStop(1, this.palette.dark);
+
+        ctx.beginPath();
+        ctx.moveTo(0, -baseH * 0.1);
+        ctx.bezierCurveTo(baseW * 0.25, -baseH * 0.55, baseW * 0.75, -baseH * 0.85, baseW * 1.15, -baseH * 0.7);
+        ctx.bezierCurveTo(baseW * 1.35, -baseH * 0.4, baseW * 1.25, -baseH * 0.05, baseW * 0.95, baseH * 0.15);
+        ctx.bezierCurveTo(baseW * 0.6, baseH * 0.25, baseW * 0.25, baseH * 0.1, 0, baseH * 0.05);
+        ctx.closePath();
+
+        ctx.fillStyle = fwGrad;
+        ctx.fill();
+        ctx.strokeStyle = this.palette.outline;
+        ctx.lineWidth = 0.85 * zScale;
+        ctx.stroke();
+
+        // Venación dorada/neón de filigrana
+        ctx.beginPath();
+        ctx.moveTo(0, 0);
+        ctx.quadraticCurveTo(baseW * 0.45, -baseH * 0.45, baseW * 0.95, -baseH * 0.55);
+        ctx.moveTo(0, 0);
+        ctx.quadraticCurveTo(baseW * 0.6, -baseH * 0.2, baseW * 1.05, -baseH * 0.15);
+        ctx.moveTo(0, 0);
+        ctx.quadraticCurveTo(baseW * 0.5, baseH * 0.05, baseW * 0.8, baseH * 0.1);
+        ctx.strokeStyle = "rgba(255, 255, 255, 0.55)";
+        ctx.lineWidth = 0.55 * zScale;
+        ctx.stroke();
+
+        // Perlas de luz en bordes alares
+        ctx.fillStyle = "#ffffff";
+        ctx.beginPath();
+        ctx.arc(baseW * 1.1, -baseH * 0.65, 1.2 * zScale, 0, Math.PI * 2);
+        ctx.arc(baseW * 1.22, -baseH * 0.25, 1.0 * zScale, 0, Math.PI * 2);
+        ctx.arc(baseW * 0.9, baseH * 0.12, 1.0 * zScale, 0, Math.PI * 2);
+        ctx.fill();
+
+        // --- ALA POSTERIOR ---
+        const hwGrad = ctx.createRadialGradient(0, baseH * 0.1, 1, baseW * 0.4, baseH * 0.4, baseW * 0.8);
+        hwGrad.addColorStop(0, this.palette.core);
+        hwGrad.addColorStop(0.35, this.palette.mid);
+        hwGrad.addColorStop(0.8, this.palette.amber);
+        hwGrad.addColorStop(1, this.palette.dark);
+
+        ctx.beginPath();
+        ctx.moveTo(0, baseH * 0.05);
+        ctx.bezierCurveTo(baseW * 0.35, baseH * 0.1, baseW * 0.85, baseH * 0.2, baseW * 0.8, baseH * 0.55);
+        ctx.bezierCurveTo(baseW * 0.7, baseH * 0.85, baseW * 0.35, baseH * 0.8, baseW * 0.15, baseH * 0.65);
+        ctx.bezierCurveTo(baseW * 0.08, baseH * 0.72, 0, baseH * 0.65, 0, baseH * 0.4);
+        ctx.closePath();
+
+        ctx.fillStyle = hwGrad;
+        ctx.fill();
+        ctx.strokeStyle = this.palette.outline;
+        ctx.lineWidth = 0.85 * zScale;
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.moveTo(0, baseH * 0.1);
+        ctx.quadraticCurveTo(baseW * 0.4, baseH * 0.35, baseW * 0.65, baseH * 0.65);
+        ctx.strokeStyle = "rgba(255, 255, 255, 0.45)";
+        ctx.lineWidth = 0.5 * zScale;
+        ctx.stroke();
+
+        ctx.restore();
+      }
+
+      // --- CUERPO & ANTENAS ---
+      ctx.shadowBlur = 4;
+      ctx.shadowColor = "#000000";
+
+      ctx.fillStyle = "#1c0c02";
+      ctx.beginPath();
+      ctx.ellipse(0, baseH * 0.05, 1.6 * zScale, baseH * 0.35, 0, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Anillos alquímicos
+      ctx.fillStyle = this.palette.mid;
+      ctx.fillRect(-1.1 * zScale, -baseH * 0.1, 2.2 * zScale, 1.1 * zScale);
+      ctx.fillRect(-0.9 * zScale, 0, 1.8 * zScale, 0.9 * zScale);
+
+      // Cabeza
+      ctx.fillStyle = "#1c0c02";
+      ctx.beginPath();
+      ctx.arc(0, -baseH * 0.32, 2.0 * zScale, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Ojos brillantes
+      ctx.fillStyle = this.palette.neon;
+      ctx.beginPath();
+      ctx.arc(-1.1 * zScale, -baseH * 0.34, 0.85 * zScale, 0, Math.PI * 2);
+      ctx.arc(1.1 * zScale, -baseH * 0.34, 0.85 * zScale, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Antenas
+      ctx.strokeStyle = this.palette.neon;
+      ctx.lineWidth = 0.7 * zScale;
+      ctx.beginPath();
+      ctx.moveTo(-0.7 * zScale, -baseH * 0.34);
+      ctx.quadraticCurveTo(-baseW * 0.25, -baseH * 0.55, -baseW * 0.35, -baseH * 0.5);
+      ctx.moveTo(0.7 * zScale, -baseH * 0.34);
+      ctx.quadraticCurveTo(baseW * 0.25, -baseH * 0.55, baseW * 0.35, -baseH * 0.5);
+      ctx.stroke();
+
+      ctx.fillStyle = "#ffffff";
+      ctx.beginPath();
+      ctx.arc(-baseW * 0.35, -baseH * 0.5, 1.0 * zScale, 0, Math.PI * 2);
+      ctx.arc(baseW * 0.35, -baseH * 0.5, 1.0 * zScale, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.restore();
+    }
+  }
+
+  // OPTIMIZACIÓN: Detectar móvil para balancear carga
+  // isMobile ya declarado arriba
+
+  const numButterflies = isMobile ? 12 : 28;
+  const numSweets = isMobile ? 6 : 16;
+  const numStardustBurst = isMobile ? 8 : 22;
+
+  const butterflies = Array.from({ length: numButterflies }, () => new AlchemicalMacondoButterfly());
+  const sweets = Array.from({ length: numSweets }, () => new CosmicSweet());
+
+  // Interacción global: clic despierta / espanta mariposas y crea ráfaga estelar
+  window.addEventListener("click", (e) => {
+    butterflies.forEach(b => {
+      const dx = b.x - e.clientX;
+      const dy = b.y - e.clientY;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      if (dist < 380) {
+        b.scare(e.clientX, e.clientY, 8.5);
+      }
+    });
+
+    for (let i = 0; i < numStardustBurst; i++) {
+      stardustParticles.push(new Stardust(e.clientX, e.clientY, ["#fde047", "#38bdf8", "#f472b6", "#c084fc", "#ffffff"][Math.floor(Math.random() * 5)]));
+    }
+  });
+
+  // ==========================================
+  // MAIN ANIMATION LOOP
+  // ==========================================
+  function animate(currentTime) {
+    requestAnimationFrame(animate);
+
+    if (document.hidden) return;
+
+    ctx.clearRect(0, 0, width, height);
+
+    // 1. Constelaciones y cielo astronómico
+    drawConstellations();
+
+    // 2. Partículas de polvo de oro y destellos (Stardust)
+    for (let i = stardustParticles.length - 1; i >= 0; i--) {
+      const p = stardustParticles[i];
+      p.update();
+      p.draw();
+      if (p.alpha <= 0) stardustParticles.splice(i, 1);
+    }
+
+    // 3. Dulces cósmicos
+    sweets.forEach(s => {
+      s.update();
+      s.draw();
+    });
+
+    // 4. Mariposas de Macondo & Metamorfosis
+    butterflies.forEach(b => {
+      b.update();
+      b.draw();
+    });
+  }
+  requestAnimationFrame(animate);
+
+  // =========================================================================
+  // 2. MOTOR DE AUDIO AVANZADO: CASSIOPEA JUKEBOX & COMPOSICIÓN PROCEDURAL
+  // =========================================================================
+  let audioCtx = null;
+  let isPlayingAudio = false;
+  let currentTrackIndex = 0;
+  let musicTimer = null;
+  let songStep = 0;
+  let droneOsc = null;
+  let droneGain = null;
+
+  // Catálogo Oficial de Canciones & Frecuencias (Cassiopea ✨🌌 & Maison Quintessence)
+  let isAutoNextEnabled = true;
+  let currentCategory = 'all';
+
+  const TRACKS = [
+    // --- CATEGORÍA: CANCIONES & MELODÍAS BRASILEÑAS / CLÁSICAS ---
+    {
+      id: 0,
+      title: "Se Essa Rua Fosse Minha",
+      artist: "Ana Santos • Cantiga Tradicional de Bahía & Amor",
+      emoji: "🇧🇷",
+      tempo: 460,
+      loopSteps: 42,
+      category: "songs",
+      type: "cantiga",
+      desc: "Cantiga tradicional de amor: 'Se essa rua fosse minha, eu mandava ladrilhar con pedrinhas de brilhante para o meu amor passar...'"
+    },
+    {
+      id: 1,
+      title: "Comptine d'un Autre Été: L'après-Midi",
+      artist: "Rogerio Tutti / Yann Tiersen (Piano)",
+      emoji: "🎹",
+      tempo: 220,
+      loopSteps: 64,
+      category: "songs",
+      type: "comptine",
+      desc: "Vals nostálgico de piano minimalista en Mi menor con arpegios fluidos."
+    },
+    {
+      id: 2,
+      title: "Claro de Luna (Moonlight Sonata)",
+      artist: "Ludwig van Beethoven • Richard Clayderman",
+      emoji: "🌙",
+      tempo: 280,
+      loopSteps: 48,
+      category: "songs",
+      type: "moonlight",
+      desc: "Arpegios nocturnos de tresillos en Do# menor con resonancia de piano de cola."
+    },
+    {
+      id: 3,
+      title: "Eu Tava Aqui Pensando",
+      artist: "Música Infantil de Bahía & Erês",
+      emoji: "👶",
+      tempo: 240,
+      loopSteps: 56,
+      category: "songs",
+      type: "pensando",
+      desc: "Ritmo alegre de samba-reggae y campanas de cristal para endulzar el alma."
+    },
+    {
+      id: 4,
+      title: "Sua Amiga Vou Sarrar",
+      artist: "MC Levin • Baile Funk & Mandelão de Brasil",
+      emoji: "🔥",
+      tempo: 140,
+      loopSteps: 64,
+      category: "songs",
+      type: "funk",
+      desc: "Ritmo enérgico de Baile Funk / Mandelão brasileño contemporáneo con Tamborzão y bajo 808."
+    },
+    {
+      id: 5,
+      title: "Bossa Nova Cósmica (Garota & Amor)",
+      artist: "Tom Jobim & Vinícius de Moraes",
+      emoji: "🎸",
+      tempo: 320,
+      loopSteps: 48,
+      category: "songs",
+      type: "bossa",
+      desc: "Batida sincopada de violão de nylon con acordes extendidos con novenas y trecenas."
+    },
+    {
+      id: 6,
+      title: "Alquimia Cuántica Procedural (Infinita)",
+      artist: "Quimera Alchemist & Cassiopea ✨🌌",
+      emoji: "🎲",
+      tempo: 270,
+      loopSteps: 64,
+      category: "songs",
+      type: "procedural",
+      desc: "Composición algorítmica infinita generada en tiempo real según la Proporción Áurea."
+    },
+    // --- CATEGORÍA: FRECUENCIAS SAGRADAS & PAISAJES AMBIENTALES ---
+    {
+      id: 7,
+      title: "Ballenas & Olas de Bahía (432 Hz)",
+      artist: "Frecuencia de Sanación Cuántica & Océano",
+      emoji: "🐋",
+      tempo: 550,
+      loopSteps: 32,
+      category: "ambient",
+      type: "ocean",
+      desc: "Drone cósmico en 432 Hz y cantos cetáceos en armónicos suaves para meditación profunda."
+    },
+    {
+      id: 8,
+      title: "Ponto Sagrado de Umbanda (Batá)",
+      artist: "Ibejis, Erês & Tambores de Luz",
+      emoji: "🪘",
+      tempo: 340,
+      loopSteps: 40,
+      category: "ambient",
+      type: "ponto",
+      desc: "Toque sagrado de atabaques, tambores Batá y campanas pentatónicas de protección espiritual."
+    },
+    {
+      id: 9,
+      title: "Lluvia de Macondo & Sanación (528 Hz)",
+      artist: "Transformación Celular & Milagros",
+      emoji: "🌧️",
+      tempo: 380,
+      loopSteps: 36,
+      category: "ambient",
+      type: "lluvia",
+      desc: "Frecuencia de reparación de ADN a 528 Hz acompañada del rumor de lluvia tibia de Macondo."
+    }
+  ];
+
+  function initWebAudio() {
+    if (!audioCtx) {
+      const AudioContext = window.AudioContext || window.webkitAudioContext;
+      audioCtx = new AudioContext();
+    }
+  }
+
+  // --- SÍNTESIS ACÚSTICA DE PIANO DE COLA (GRAN PIANO CON DOBLE CUERDA) ---
+  function playPianoNote(freq, delay = 0, duration = 1.8, volume = 0.22) {
+    if (!audioCtx || !isPlayingAudio) return;
+    if (typeof freq !== 'number' || !isFinite(freq) || freq <= 0) return;
+    const now = (audioCtx.currentTime || 0) + (typeof delay === 'number' && isFinite(delay) ? delay : 0);
+    const dur = typeof duration === 'number' && isFinite(duration) && duration > 0 ? duration : 1.8;
+    const vol = typeof volume === 'number' && isFinite(volume) && volume > 0 ? volume : 0.22;
+
+    try {
+      const osc1 = audioCtx.createOscillator();
+      const osc2 = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      const filter = audioCtx.createBiquadFilter();
+
+      osc1.type = 'triangle';
+      osc1.frequency.setValueAtTime(freq, now);
+
+      osc2.type = 'sine';
+      osc2.frequency.setValueAtTime(freq * 1.0015, now);
+
+      filter.type = 'lowpass';
+      filter.frequency.setValueAtTime(2400, now);
+      filter.frequency.exponentialRampToValueAtTime(320, now + dur * 0.7);
+
+      gain.gain.setValueAtTime(0.0001, now);
+      gain.gain.linearRampToValueAtTime(vol, now + 0.008);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + dur);
+
+      osc1.connect(filter);
+      osc2.connect(filter);
+      filter.connect(gain);
+      gain.connect(audioCtx.destination);
+
+      osc1.start(now);
+      osc2.start(now);
+      osc1.stop(now + dur + 0.05);
+      osc2.stop(now + dur + 0.05);
+    } catch (e) {
+      console.warn("Piano note handled:", e);
+    }
+  }
+
+  // --- SÍNTESIS DE GUITARRA DE NYLON (BOSSA & CANTIGA) ---
+  function playNylonGuitarNote(freq, delay = 0, duration = 1.4, volume = 0.2) {
+    if (!audioCtx || !isPlayingAudio) return;
+    if (typeof freq !== 'number' || !isFinite(freq) || freq <= 0) return;
+    const now = (audioCtx.currentTime || 0) + (typeof delay === 'number' && isFinite(delay) ? delay : 0);
+    const dur = typeof duration === 'number' && isFinite(duration) && duration > 0 ? duration : 1.4;
+    const vol = typeof volume === 'number' && isFinite(volume) && volume > 0 ? volume : 0.2;
+
+    try {
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      const filter = audioCtx.createBiquadFilter();
+
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(freq, now);
+
+      filter.type = 'bandpass';
+      filter.frequency.setValueAtTime(900, now);
+      filter.Q.setValueAtTime(1.5, now);
+
+      gain.gain.setValueAtTime(0.0001, now);
+      gain.gain.linearRampToValueAtTime(vol, now + 0.012);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + dur);
+
+      osc.connect(filter);
+      filter.connect(gain);
+      gain.connect(audioCtx.destination);
+
+      osc.start(now);
+      osc.stop(now + dur + 0.05);
+    } catch (e) {
+      console.warn("Nylon note handled:", e);
+    }
+  }
+
+  // --- CAMPANAS CÓSMICAS & SHIMMER ---
+  function playBellChime(freq, delay = 0, volume = 0.12) {
+    if (!audioCtx || !isPlayingAudio) return;
+    if (typeof freq !== 'number' || !isFinite(freq) || freq <= 0) return;
+    const now = (audioCtx.currentTime || 0) + (typeof delay === 'number' && isFinite(delay) ? delay : 0);
+    const vol = typeof volume === 'number' && isFinite(volume) && volume > 0 ? volume : 0.12;
+
+    try {
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(freq, now);
+
+      gain.gain.setValueAtTime(0.0001, now);
+      gain.gain.linearRampToValueAtTime(vol, now + 0.005);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + 2.2);
+
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+
+      osc.start(now);
+      osc.stop(now + 2.25);
+    } catch (e) {
+      console.warn("Bell chime handled:", e);
+    }
+  }
+
+  // --- SÍNTESIS DE BAILE FUNK & TAMBORZÃO (MC LEVIN) ---
+  function playFunk808Kick(delay = 0) {
+    if (!audioCtx || !isPlayingAudio) return;
+    const now = (audioCtx.currentTime || 0) + delay;
+    try {
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(150, now);
+      osc.frequency.exponentialRampToValueAtTime(42, now + 0.18);
+      gain.gain.setValueAtTime(0.4, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.28);
+      osc.connect(gain); gain.connect(audioCtx.destination);
+      osc.start(now); osc.stop(now + 0.3);
+    } catch(e) {}
+  }
+
+  function playFunkSnare(delay = 0) {
+    if (!audioCtx || !isPlayingAudio) return;
+    const now = (audioCtx.currentTime || 0) + delay;
+    try {
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      const filter = audioCtx.createBiquadFilter();
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(280, now);
+      filter.type = 'highpass';
+      filter.frequency.setValueAtTime(800, now);
+      gain.gain.setValueAtTime(0.25, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.12);
+      osc.connect(filter); filter.connect(gain); gain.connect(audioCtx.destination);
+      osc.start(now); osc.stop(now + 0.14);
+    } catch(e) {}
+  }
+
+  function playFunkSynthLead(freq, delay = 0, volume = 0.22) {
+    if (!audioCtx || !isPlayingAudio || !freq || isNaN(freq) || !isFinite(freq)) return;
+    const now = (audioCtx.currentTime || 0) + delay;
+    try {
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      const filter = audioCtx.createBiquadFilter();
+      osc.type = 'sawtooth';
+      osc.frequency.setValueAtTime(freq, now);
+      filter.type = 'lowpass';
+      filter.frequency.setValueAtTime(3200, now);
+      filter.frequency.exponentialRampToValueAtTime(800, now + 0.18);
+      gain.gain.setValueAtTime(0.001, now);
+      gain.gain.linearRampToValueAtTime(volume, now + 0.005);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.22);
+      osc.connect(filter); filter.connect(gain); gain.connect(audioCtx.destination);
+      osc.start(now); osc.stop(now + 0.24);
+    } catch(e) {}
+  }
+
+  // --- TABLAS DE NOTAS DE ALTA PRECISIÓN (FRECUENCIAS OCTAVAS 1 A 6) ---
+  const N = {
+    // Octava 1
+    C1: 32.70, Cs1: 34.65, D1: 36.71, Ds1: 38.89, E1: 41.20, F1: 43.65, Fs1: 46.25, G1: 49.00, Gs1: 51.91, A1: 55.00, Bb1: 58.27, B1: 61.74,
+    // Octava 2
+    C2: 65.41, Cs2: 69.30, D2: 73.42, Ds2: 77.78, E2: 82.41, F2: 87.31, Fs2: 92.50, G2: 98.00, Gs2: 103.83, A2: 110.00, Bb2: 116.54, B2: 123.47,
+    // Octava 3
+    C3: 130.81, Cs3: 138.59, D3: 146.83, Ds3: 155.56, E3: 164.81, F3: 174.61, Fs3: 185.00, G3: 196.00, Gs3: 207.65, A3: 220.00, Bb3: 233.08, B3: 246.94,
+    // Octava 4
+    C4: 261.63, Cs4: 277.18, D4: 293.66, Ds4: 311.13, E4: 329.63, F4: 349.23, Fs4: 369.99, G4: 392.00, Gs4: 415.30, A4: 440.00, Bb4: 466.16, B4: 493.88,
+    // Octava 5
+    C5: 523.25, Cs5: 554.37, D5: 587.33, Ds5: 622.25, E5: 659.25, F5: 698.46, Fs5: 739.99, G5: 783.99, Gs5: 830.61, A5: 880.00, Bb5: 932.33, B5: 987.77,
+    // Octava 6
+    C6: 1046.50, D6: 1174.66, E6: 1318.51, G6: 1567.98
+  };
+
+  // --- MOTOR PRINCIPAL DE SECUENCIACIÓN POR CANCIÓN ---
+  function playSongStep() {
+    if (!audioCtx || !isPlayingAudio) return;
+    const track = TRACKS[currentTrackIndex];
+
+    switch (track.type) {
+      // -------------------------------------------------------------
+      // 0. SE ESSA RUA FOSSE MINHA (Cantiga de Bahía)
+      // -------------------------------------------------------------
+      case 'cantiga': {
+        const cantigaScore = [
+          // "Se essa rua, se essa rua fosse minha..."
+          { bass: N.D3, chord: [N.F4, N.A4], mel: N.D4 },
+          { bass: null, chord: [N.F4, N.A4], mel: N.E4 },
+          { bass: null, chord: null, mel: N.F4 },
+          { bass: N.D3, chord: [N.F4, N.A4], mel: N.G4 },
+          { bass: null, chord: [N.F4, N.A4], mel: N.A4 },
+          { bass: null, chord: null, mel: N.A4 },
+          { bass: N.A2, chord: [N.E4, N.G4, N.Cs4], mel: N.G4 },
+          { bass: null, chord: [N.E4, N.G4], mel: N.F4 },
+          { bass: null, chord: null, mel: N.E4 },
+          // "Eu mandava, eu mandava ladrilhar..."
+          { bass: N.D3, chord: [N.F4, N.A4], mel: N.D4 },
+          { bass: null, chord: [N.F4, N.A4], mel: N.E4 },
+          { bass: null, chord: null, mel: N.F4 },
+          { bass: N.G3, chord: [N.D4, N.Bb4], mel: N.G4 },
+          { bass: null, chord: [N.D4, N.Bb4], mel: N.F4 },
+          { bass: null, chord: null, mel: N.E4 },
+          // "Com pedrinhas, com pedrinhas de brilhante..."
+          { bass: N.A2, chord: [N.E4, N.G4, N.Cs4], mel: N.D4 },
+          { bass: null, chord: [N.E4, N.G4], mel: N.Cs4 },
+          { bass: null, chord: null, mel: N.D4 },
+          { bass: N.D3, chord: [N.F4, N.A4, N.D5], mel: N.D5 },
+          { bass: null, chord: [N.F4, N.A4], mel: N.A4 },
+          { bass: null, chord: null, mel: N.F4 }
+        ];
+
+        const step = cantigaScore[songStep % cantigaScore.length];
+        if (step.bass) playNylonGuitarNote(step.bass, 0, 1.8, 0.24);
+        if (step.chord) step.chord.forEach(f => playNylonGuitarNote(f, 0.05, 1.2, 0.12));
+        if (step.mel) {
+          playNylonGuitarNote(step.mel, 0.02, 1.5, 0.28);
+          playBellChime(step.mel * 2, 0.02, 0.08);
+        }
+        break;
+      }
+
+      // -------------------------------------------------------------
+      // 1. COMPTINE D'UN AUTRE ÉTÉ (Yann Tiersen / Rogerio Tutti)
+      // -------------------------------------------------------------
+      case 'comptine': {
+        const comptinePatterns = [
+          // Em
+          { bass: N.E2, arp: [N.E3, N.B3, N.G4, N.B3, N.E4, N.B3, N.G4, N.B3], mel: [N.B4, null, N.B4, N.A4, N.G4, null, N.A4, null] },
+          // G
+          { bass: N.G2, arp: [N.G3, N.D4, N.B4, N.D4, N.G4, N.D4, N.B4, N.D4], mel: [N.B4, null, N.B4, N.A4, N.G4, null, N.B4, null] },
+          // Bm
+          { bass: N.B1, arp: [N.B2, N.Fs3, N.D4, N.Fs3, N.B3, N.Fs3, N.D4, N.Fs3], mel: [N.Fs4, null, N.Fs4, N.E4, N.D4, null, N.E4, null] },
+          // D
+          { bass: N.D2, arp: [N.D3, N.A3, N.Fs4, N.A3, N.D4, N.A3, N.Fs4, N.A3], mel: [N.Fs4, null, N.E4, N.D4, N.Cs4, null, N.D4, null] }
+        ];
+
+        const barIdx = Math.floor(songStep / 8) % comptinePatterns.length;
+        const subStep = songStep % 8;
+        const bar = comptinePatterns[barIdx];
+
+        if (subStep === 0) playPianoNote(bar.bass, 0, 2.2, 0.28);
+        playPianoNote(bar.arp[subStep], 0, 0.9, 0.16);
+
+        if (bar.mel[subStep]) {
+          playPianoNote(bar.mel[subStep], 0.01, 1.4, 0.32);
+          playBellChime(bar.mel[subStep], 0.01, 0.1);
+        }
+        break;
+      }
+
+      // -------------------------------------------------------------
+      // 2. CLARO DE LUNA (Moonlight Sonata - Beethoven / Debussy)
+      // -------------------------------------------------------------
+      case 'moonlight': {
+        const moonlightBars = [
+          // C#m
+          { bass: N.Cs2, trip: [N.Gs3, N.Cs4, N.E4], melStep: { 0: N.Gs4, 9: N.Gs4 } },
+          // C#m / B
+          { bass: N.B1, trip: [N.Gs3, N.Cs4, N.E4], melStep: { 0: N.Gs4, 9: N.A4 } },
+          // A
+          { bass: N.A1, trip: [N.A3, N.Cs4, N.E4], melStep: { 0: N.A4, 9: N.Gs4 } },
+          // G#7
+          { bass: N.Gs1, trip: [N.Gs3, N.Cs4, N.Ds4], melStep: { 0: N.Fs4, 9: N.E4 } }
+        ];
+
+        const barIdx = Math.floor(songStep / 12) % moonlightBars.length;
+        const subStep = songStep % 3;
+        const sub12 = songStep % 12;
+        const bar = moonlightBars[barIdx];
+
+        if (sub12 === 0) playPianoNote(bar.bass, 0, 3.2, 0.3);
+        playPianoNote(bar.trip[subStep], 0, 1.1, 0.15);
+
+        const melNote = bar.melStep[sub12];
+        if (melNote) {
+          playPianoNote(melNote, 0.015, 2.0, 0.35);
+          playBellChime(melNote, 0.015, 0.12);
+        }
+        break;
+      }
+
+      // -------------------------------------------------------------
+      // 3. EU TAVA AQUI PENSANDO (Erês & Samba Infantil)
+      // -------------------------------------------------------------
+      case 'pensando': {
+        const pensandoMelody = [
+          { bass: N.C3, mel: N.G4, drum: true },
+          { bass: null, mel: N.E4 },
+          { bass: N.G2, mel: N.G4, drum: true },
+          { bass: null, mel: N.A4 },
+          { bass: N.C3, mel: N.G4, drum: true },
+          { bass: null, mel: N.E4 },
+          { bass: N.G2, mel: N.D4, drum: true },
+          { bass: null, mel: N.E4 },
+          { bass: N.F2, mel: N.F4, drum: true },
+          { bass: null, mel: N.A4 },
+          { bass: N.C3, mel: N.G4, drum: true },
+          { bass: null, mel: N.E4 },
+          { bass: N.G2, mel: N.D4, drum: true },
+          { bass: null, mel: N.C4 }
+        ];
+
+        const step = pensandoMelody[songStep % pensandoMelody.length];
+        if (step.bass) playNylonGuitarNote(step.bass, 0, 0.8, 0.25);
+        if (step.mel) {
+          playBellChime(step.mel, 0.01, 0.22);
+          playNylonGuitarNote(step.mel, 0.01, 0.8, 0.18);
+        }
+        if (step.drum && songStep % 2 === 0) {
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          osc.frequency.setValueAtTime(120, audioCtx.currentTime);
+          osc.frequency.exponentialRampToValueAtTime(40, audioCtx.currentTime + 0.2);
+          gain.gain.setValueAtTime(0.25, audioCtx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.2);
+          osc.connect(gain); gain.connect(audioCtx.destination);
+          osc.start(); osc.stop(audioCtx.currentTime + 0.22);
+        }
+        break;
+      }
+
+      // -------------------------------------------------------------
+      // 4. SUA AMIGA VOU SARRAR (MC Levin - Baile Funk / Mandelão)
+      // -------------------------------------------------------------
+      case 'funk': {
+        const funkPattern = [
+          // Tamborzão 16-step beat: Tu-Tu-Ta, Tu-Tu-Ta + Lead Hook
+          { kick: true, snare: false, lead: N.E4 },
+          { kick: false, snare: false, lead: null },
+          { kick: true, snare: false, lead: N.G4 },
+          { kick: false, snare: true,  lead: N.A4 },
+          { kick: true, snare: false, lead: N.G4 },
+          { kick: false, snare: false, lead: null },
+          { kick: true, snare: false, lead: N.E4 },
+          { kick: false, snare: true,  lead: N.D4 },
+          { kick: true, snare: false, lead: N.E4 },
+          { kick: false, snare: false, lead: null },
+          { kick: true, snare: false, lead: N.G4 },
+          { kick: false, snare: true,  lead: N.A4 },
+          { kick: true, snare: false, lead: N.B4 },
+          { kick: false, snare: false, lead: N.A4 },
+          { kick: true, snare: false, lead: N.G4 },
+          { kick: false, snare: true,  lead: N.E4 }
+        ];
+
+        const step = funkPattern[songStep % funkPattern.length];
+        if (step.kick) playFunk808Kick(0);
+        if (step.snare) playFunkSnare(0);
+        if (step.lead) playFunkSynthLead(step.lead, 0, 0.22);
+        break;
+      }
+
+      // -------------------------------------------------------------
+      // 5. BOSSA NOVA CÓSMICA (Tom Jobim)
+      // -------------------------------------------------------------
+      case 'bossa': {
+        const bossaChordsList = [
+          { bass: N.D3, chord: [N.F4, N.A4, N.C5, N.E5] }, // Dm9
+          { bass: N.G2, chord: [N.F4, N.B4, N.E5] },       // G13
+          { bass: N.C3, chord: [N.E4, N.G4, N.B4, N.D5] }, // Cmaj9
+          { bass: N.A2, chord: [N.G4, N.Cs5, N.F5] }       // A7(b13)
+        ];
+
+        const chordIdx = Math.floor(songStep / 4) % bossaChordsList.length;
+        const subStep = songStep % 4;
+        const c = bossaChordsList[chordIdx];
+
+        if (subStep === 0) {
+          playNylonGuitarNote(c.bass, 0, 1.8, 0.28);
+          c.chord.forEach(f => playNylonGuitarNote(f, 0.05, 1.2, 0.12));
+        } else if (subStep === 1 || subStep === 3) {
+          c.chord.forEach(f => playNylonGuitarNote(f, 0.08, 0.9, 0.14));
+        }
+        break;
+      }
+
+      // -------------------------------------------------------------
+      // 6. ALQUIMIA CUÁNTICA PROCEDURAL (Generación Infinita)
+      // -------------------------------------------------------------
+      case 'procedural': {
+        const pentatonicScale = [N.C3, N.D3, N.E3, N.G3, N.A3, N.C4, N.D4, N.E4, N.G4, N.A4, N.C5, N.D5, N.E5, N.G5];
+        const randomBass = [N.C2, N.F2, N.G2, N.A2, N.D2][Math.floor(songStep / 8) % 5];
+        
+        if (songStep % 8 === 0) {
+          playPianoNote(randomBass, 0, 2.5, 0.3);
+          playNylonGuitarNote(randomBass * 2, 0.02, 2.0, 0.2);
+        }
+
+        const note = pentatonicScale[Math.floor(Math.random() * pentatonicScale.length)];
+        playPianoNote(note, 0, 1.2, 0.22);
+        if (Math.random() < 0.4) {
+          playBellChime(note * 1.5, 0.05, 0.12);
+        }
+        break;
+      }
+
+      // -------------------------------------------------------------
+      // 7. BALLENAS & OLAS DE BAHÍA (432 Hz)
+      // -------------------------------------------------------------
+      case 'ocean': {
+        if (songStep % 8 === 0) {
+          playPianoNote(N.C2, 0, 3.5, 0.25);
+          const now = audioCtx.currentTime;
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          const filter = audioCtx.createBiquadFilter();
+          osc.type = 'sine';
+          filter.type = 'lowpass';
+          filter.frequency.setValueAtTime(450, now);
+          const baseFreq = 160 + (songStep % 16) * 10;
+          osc.frequency.setValueAtTime(baseFreq, now);
+          osc.frequency.linearRampToValueAtTime(baseFreq * 1.35, now + 1.2);
+          osc.frequency.exponentialRampToValueAtTime(baseFreq * 0.75, now + 3.4);
+          gain.gain.setValueAtTime(0.001, now);
+          gain.gain.linearRampToValueAtTime(0.18, now + 1.0);
+          gain.gain.exponentialRampToValueAtTime(0.0001, now + 3.5);
+          osc.connect(filter); filter.connect(gain); gain.connect(audioCtx.destination);
+          osc.start(now); osc.stop(now + 3.6);
+        }
+        if (songStep % 4 === 2) {
+          playBellChime(N.G5, 0, 0.08);
+        }
+        break;
+      }
+
+      // -------------------------------------------------------------
+      // 8. PONTO SAGRADO DE UMBANDA (Batá & Atabaques)
+      // -------------------------------------------------------------
+      case 'ponto': {
+        if (songStep % 4 === 0 || songStep % 4 === 2) {
+          const now = audioCtx.currentTime;
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(140, now);
+          osc.frequency.exponentialRampToValueAtTime(45, now + 0.3);
+          gain.gain.setValueAtTime(0.35, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.3);
+          osc.connect(gain); gain.connect(audioCtx.destination);
+          osc.start(now); osc.stop(now + 0.32);
+        }
+        const pontoBell = [N.C5, N.E5, N.G5, N.A5][songStep % 4];
+        playBellChime(pontoBell, 0.02, 0.16);
+        break;
+      }
+
+      // -------------------------------------------------------------
+      // 9. LLUVIA DE MACONDO & SANACIÓN (528 Hz)
+      // -------------------------------------------------------------
+      case 'lluvia': {
+        if (songStep % 8 === 0) {
+          playPianoNote(528, 0, 3.2, 0.22);
+          playBellChime(528 * 2, 0.05, 0.14);
+        }
+        if (songStep % 2 === 1) {
+          const rainNotes = [N.E5, N.G5, N.C6, N.D6, N.E6];
+          playBellChime(rainNotes[Math.floor(Math.random() * rainNotes.length)], 0, 0.09);
+        }
+        break;
+      }
+    }
+
+    songStep++;
+
+    // Comprobar si corresponde pase automático al completar ciclo
+    if (isAutoNextEnabled && track.loopSteps && songStep >= track.loopSteps) {
+      songStep = 0;
+      nextTrack(true);
+    }
+  }
+
+  // --- CONTROLES DEL REPRODUCTOR & GESTIÓN DE PASES ---
+  function updatePlayerUI() {
+    const track = TRACKS[currentTrackIndex];
+    document.getElementById('playerCoverEmoji').innerText = track.emoji;
+    document.getElementById('playerTrackTitle').innerText = track.title;
+    document.getElementById('playerTrackArtist').innerText = track.artist;
+
+    document.querySelectorAll('#trackPillsContainer .track-pill').forEach((pill, i) => {
+      i === currentTrackIndex ? pill.classList.add('active') : pill.classList.remove('active');
+    });
+
+    document.getElementById('mainPlayBtn').innerText = isPlayingAudio ? '⏸️' : '▶️';
+    document.getElementById('eqWaveVisualizer').style.opacity = isPlayingAudio ? '1' : '0.4';
+  }
+
+  function startMusicPlayback() {
+    initWebAudio();
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+    isPlayingAudio = true;
+    songStep = 0;
+
+    // Drone 432 Hz de fondo
+    droneOsc = audioCtx.createOscillator();
+    droneGain = audioCtx.createGain();
+    droneOsc.type = 'sine';
+    droneOsc.frequency.setValueAtTime(130.81, audioCtx.currentTime);
+    droneGain.gain.setValueAtTime(0.001, audioCtx.currentTime);
+    droneGain.gain.linearRampToValueAtTime(0.05, audioCtx.currentTime + 2);
+    droneOsc.connect(droneGain); droneGain.connect(audioCtx.destination);
+    droneOsc.start();
+
+    const track = TRACKS[currentTrackIndex];
+    playSongStep();
+    musicTimer = setInterval(playSongStep, track.tempo);
+
+    updatePlayerUI();
+    showPlayerToast(`▶️ Reproduciendo: ${track.title}`);
+  }
+
+  function stopMusicPlayback() {
+    isPlayingAudio = false;
+    clearInterval(musicTimer);
+    if (droneOsc) {
+      droneGain.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 0.3);
+      setTimeout(() => { try { droneOsc.stop(); } catch(e){} }, 350);
+    }
+    updatePlayerUI();
+    showPlayerToast('⏸️ Sonido en Pausa');
+  }
+
+  function togglePlayTrack() {
+    isPlayingAudio ? stopMusicPlayback() : startMusicPlayback();
+  }
+
+  function selectTrack(index) {
+    currentTrackIndex = index;
+    songStep = 0;
+    if (isPlayingAudio) {
+      clearInterval(musicTimer);
+      const track = TRACKS[currentTrackIndex];
+      playSongStep();
+      musicTimer = setInterval(playSongStep, track.tempo);
+    }
+    updatePlayerUI();
+    showPlayerToast(`▶️ ${TRACKS[currentTrackIndex].title}`);
+  }
+
+  function nextTrack(isAuto = false) {
+    const activeList = getFilteredTrackIndices();
+    const currentPos = activeList.indexOf(currentTrackIndex);
+    const nextIdx = activeList[(currentPos + 1) % activeList.length];
+    selectTrack(nextIdx);
+    if (isAuto) {
+      showPlayerToast(`⏭️ Pase Automático: ${TRACKS[nextIdx].title}`);
+    } else {
+      showPlayerToast(`⏭️ Siguiente: ${TRACKS[nextIdx].title}`);
+    }
+  }
+
+  function prevTrack() {
+    const activeList = getFilteredTrackIndices();
+    const currentPos = activeList.indexOf(currentTrackIndex);
+    const prevIdx = activeList[(currentPos - 1 + activeList.length) % activeList.length];
+    selectTrack(prevIdx);
+    showPlayerToast(`⏮️ Anterior: ${TRACKS[prevIdx].title}`);
+  }
+
+  function toggleAutoNext() {
+    isAutoNextEnabled = !isAutoNextEnabled;
+    const btn = document.getElementById('autoNextBtn');
+    const txt = document.getElementById('autoNextText');
+    if (isAutoNextEnabled) {
+      btn.classList.add('active');
+      txt.innerText = 'Auto-Pase: ON';
+      showPlayerToast('🔁 Auto-Pase Activado: Pasará de sonido automáticamente');
+    } else {
+      btn.classList.remove('active');
+      txt.innerText = 'Auto-Pase: OFF';
+      showPlayerToast('⏸️ Auto-Pase Desactivado: Bucle en la pista actual');
+    }
+  }
+
+  function showPlayerToast(msg) {
+    const toast = document.getElementById('playerToast');
+    if (!toast) return;
+    toast.innerText = msg;
+    toast.classList.add('show');
+    clearTimeout(toast.timer);
+    toast.timer = setTimeout(() => toast.classList.remove('show'), 2400);
+  }
+
+  function filterPlayerCategory(cat) {
+    currentCategory = cat;
+    document.querySelectorAll('.cat-tab-btn').forEach(btn => btn.classList.remove('active'));
+    const activeBtn = document.getElementById(`catBtn-${cat}`);
+    if (activeBtn) activeBtn.classList.add('active');
+
+    document.querySelectorAll('#trackPillsContainer .track-pill').forEach((pill, idx) => {
+      const trackCat = TRACKS[idx].category;
+      if (cat === 'all' || cat === trackCat) {
+        pill.style.display = 'flex';
+      } else {
+        pill.style.display = 'none';
+      }
+    });
+
+    const visibleList = getFilteredTrackIndices();
+    if (!visibleList.includes(currentTrackIndex) && visibleList.length > 0) {
+      selectTrack(visibleList[0]);
+    }
+    showPlayerToast(cat === 'all' ? '🌟 Mostrando Todos los Sonidos' : (cat === 'songs' ? '🇧🇷 Modo Canciones' : '🌌 Modo Frecuencias 432 Hz'));
+  }
+
+  function getFilteredTrackIndices() {
+    if (currentCategory === 'all') return TRACKS.map((_, i) => i);
+    return TRACKS.filter(t => t.category === currentCategory).map(t => t.id);
+  }
+
+  function generateRandomAlchemicalMusic() {
+    selectTrack(6); // Activa el Modo 7: Alquimia Procedural Infinita
+    if (!isPlayingAudio) startMusicPlayback();
+    showPlayerToast('🎲 Componiendo Alquimia Cuántica Procedural...');
+  }
+
+  // Compatibilidad con botón legacy
+  function toggleSoundscape() { togglePlayTrack(); }
+
+  // ==========================================
+  // 3. NAVEGACIÓN Y BITÁCORA
+  // ==========================================
+  const STORAGE_KEY = 'ibeji_umbanda_memories_v1';
+  let memories = [];
+
+  const trailerScenes = [
+    {
+      img: 'assets/images/cartel_instagram_story_9_16.jpg',
+      act: 'ACTO I • EL PRESAGIO DE LAS MARIPOSAS',
+      text: '"Muchos años después, frente a la orilla del río de los almendros secos, el pueblo habría de recordar aquella tarde luminosa en que la Muerte olvidó cómo se recogían los muertos..."'
+    },
+    {
+      img: 'assets/images/capitulo2_el_duelo_alquimico.jpg',
+      act: 'ACTO II • EL DUELO ALQUÍMICO EN LA ENCRUCIJADA',
+      text: '"No hacían falta espadas de acero para vencer a la fatalidad, sino dos hermanos que se turnaran para engañar al cansancio, tocando un tambor templado con la leche de las estrellas y transmutando la tierra estéril en oro líquido..."'
+    },
+    {
+      img: 'assets/images/escena_eres_lluvia_dulces.jpg',
+      act: 'ACTO III • LA APOTEOSIS DE LOS ERÊS',
+      text: '"Y fue así como se decretó para siempre que no existe pena en este mundo, por antigua que sea, que no pueda disolverse con la carcajada inocente de un niño..."'
+    },
+    {
+      img: 'assets/images/escena_danza_muerte.jpg',
+      act: 'ACTO IV • EL VALS INMORTAL DE IKÚ',
+      text: '"Taiwo ya probó el mundo... y nos dijo que era hermoso."'
+    }
+  ];
+
+  function loadScene(index) {
+    const scene = trailerScenes[index];
+    if (!scene) return;
+    document.getElementById('trailerImg').src = scene.img;
+    document.getElementById('trailerActText').innerText = scene.act;
+    document.getElementById('trailerVoiceText').innerText = scene.text;
+    const btns = document.querySelectorAll('.scene-btn');
+    btns.forEach((b, i) => { i === index ? b.classList.add('active') : b.classList.remove('active'); });
+  }
+
+  function showTab(tabId) {
+    document.querySelectorAll('.tab-content').forEach(el => el.style.display = 'none');
+    document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+    const target = document.getElementById(`tab-${tabId}`);
+    if (target) target.style.display = 'block';
+    const activeBtn = Array.from(document.querySelectorAll('.tab-btn')).find(b => b.getAttribute('onclick') && b.getAttribute('onclick').includes(tabId));
+    if (activeBtn) activeBtn.classList.add('active');
+  }
+
+  function loadMemories() {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) try { memories = JSON.parse(saved); } catch(e) {}
+    renderMemories();
+  }
+
+  function saveMemory(e) {
+    e.preventDefault();
+    const title = document.getElementById('memoryTitle').value;
+    const content = document.getElementById('memoryBody').value;
+    const date = new Date().toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' });
+    if (!title || !content) return;
+    memories.unshift({ id: Date.now(), title, content, date });
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(memories));
+    document.getElementById('memoryTitle').value = '';
+    document.getElementById('memoryBody').value = '';
+    renderMemories();
+  }
+
+  function deleteMemory(id) {
+    if (confirm('¿Deseas eliminar este relato?')) {
+      memories = memories.filter(m => m.id !== id);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(memories));
+      renderMemories();
+    }
+  }
+
+  function renderMemories() {
+    const container = document.getElementById('memoriesList');
+    if (!container) return;
+    container.innerHTML = memories.map(m => `
+      <div class="memory-item">
+        <div style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-dim); margin-bottom: 0.25rem;">🗓️ ${m.date}</div>
+        <div class="memory-title">${m.title}</div>
+        <div class="memory-content">${m.content.replace(/\n/g, '<br>')}</div>
+        <button onclick="deleteMemory(${m.id})" style="position: absolute; top: 0.75rem; right: 0.75rem; background: none; border: none; color: var(--accent-pink); cursor: pointer;" title="Eliminar">🗑️</button>
+      </div>
+    `).join('');
+  }
+
+    // Lógica de bienvenida
+    function enterExperience() {
+      const overlay = document.getElementById('welcomeOverlay');
+      const container = document.getElementById('mainContainer');
+      const zenBtn = document.getElementById('zenBtn');
+      
+      overlay.style.opacity = '0';
+      setTimeout(() => {
+        overlay.style.display = 'none';
+        container.classList.remove('content-hidden');
+        container.style.opacity = '1';
+        container.style.pointerEvents = 'auto';
+        
+        // Mostrar botón Zen
+        if (zenBtn) zenBtn.classList.add('visible');
+        
+        // Intentar iniciar audio automáticamente si no está en autoplay blocker
+        if (typeof playAudio === 'function') {
+          // En navegadores modernos requiere interacción previa (el click en el botón funciona como interacción)
+          playAudio();
+        }
+      }, 1000);
+    }
+
+    // Modo Zen (Ocultar Interfaz)
+    function toggleZenMode() {
+      document.body.classList.toggle("zen-active");
+      const btn = document.getElementById("zenBtn");
+      const isZen = document.body.classList.contains("zen-active");
+      if (btn) {
+        btn.innerHTML = isZen ? "👁️" : "🌌";
+        btn.title = isZen ? "Salir del Modo Zen (Mostrar Interfaz)" : "Modo Zen (Ocultar Interfaz)";
+      }
+    }
+
+    // Inicializar al cargar
+    window.addEventListener('DOMContentLoaded', () => {
+      loadScene(0);
+      loadMemories();
+    });
+  </script>
+
+  <!-- BOTÓN MODO ZEN (FLOTANTE) -->
+  <button id="zenBtn" class="zen-btn" onclick="toggleZenMode()" title="Modo Zen (Ocultar Interfaz)">🌌</button>
+
+  <!-- BOTÓN FLOTANTE WHATSAPP (ICON-ONLY LUXURY GLASS) -->
+  <a href="https://wa.me/34641868620?text=Hola%20Daniel,%20he%20visto%20tu%20trabajo%20en%20ER%C3%8AS%20y%20Maison%20Quintessence.%20Quiero%20consultar%20por%20un%20desarrollo%20web%20de%20alto%20impacto." 
+     target="_blank" 
+     rel="noopener" 
+     class="floating-whatsapp-btn" 
+     title="Contactar con Daniel Sid (+34 641 86 86 20)">
+    <svg class="wa-svg" viewBox="0 0 24 24">
+      <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+    </svg>
+    <span class="wa-luxury-tooltip">WhatsApp (+34 641 86 86 20)</span>
+  </a>
+
+  <!-- BARRA DE PERSPECTIVA CELESTE DESPLEGABLE / RETRÁCTIL -->
+  <div class="sky-location-bar collapsed" id="skyLocationBar">
+    <button class="sky-bar-toggle-trigger" id="skyBarToggleBtn" title="Plegar / Desplegar Controles del Cielo">
+      <span class="pulse-dot"></span>
+      <span id="skyBarCurrentLabel">🌌 Cielo: 🇪🇸 Madrid</span>
+      <span class="arrow-indicator">▾</span>
+    </button>
+    <div class="sky-bar-body">
+      <div class="location-buttons">
+        <button class="loc-btn active" data-loc="madrid" title="Perspectiva desde Madrid, España (Hogar & Templo en Argüelles)">
+          🇪🇸 Madrid
+        </button>
+        <button class="loc-btn" data-loc="bahia" title="Perspectiva desde Salvador de Bahía, Brasil (Cielo de Cassiopea ✨🌌)">
+          🇧🇷 Bahía
+        </button>
+        <button class="loc-btn" data-loc="manizales" title="Perspectiva desde Manizales, Colombia (Cielo de Ósculo Sid 💫 & Adrián)">
+          🇨🇴 Manizales
+        </button>
+      </div>
+        <div class="sky-constellation-select-wrap" style="display:inline-flex; align-items:center;">
+          <select id="constellationPicker" class="constellation-select" title="Saltar directamente a una constelación">
+            <option value="">🎯 Saltar a Constelación...</option>
+            <option value="sagitario">🏹 Sagitario (La Tetera)</option>
+            <option value="orión">⚔️ Orión (El Cazador)</option>
+            <option value="escorpio">🦂 Escorpio (Antares)</option>
+            <option value="géminis">♊ Géminis (Ibejis)</option>
+            <option value="cassiopea">👑 Cassiopea (La Reina)</option>
+            <option value="cruz del sur">✝️ Cruz del Sur</option>
+            <option value="osa mayor">🐻 Osa Mayor (El Carro)</option>
+            <option value="can mayor">🐕 Can Mayor (Sirio)</option>
+            <option value="cisne">🦢 Cisne (Cruz del Norte)</option>
+            <option value="lira">🪕 Lira (Vega)</option>
+            <option value="águila">🦅 Águila (Altair)</option>
+            <option value="tauro">♉ Tauro (Aldebarán)</option>
+            <option value="leo">♌ Leo (Régulo)</option>
+            <option value="virgo">♍ Virgo (Espiga)</option>
+            <option value="libra">♎ Libra</option>
+            <option value="capricornio">♑ Capricornio</option>
+            <option value="acuario">♒ Acuario</option>
+            <option value="piscis">♓ Piscis</option>
+            <option value="aries">♈ Aries</option>
+            <option value="cáncer">♋ Cáncer</option>
+            <option value="centauro">🐴 Centauro (Alfa Centauri)</option>
+            <option value="pegaso">🐎 Pegaso</option>
+          </select>
+        </div>
+
+      <div class="sky-toggle-group">
+        <button class="icon-toggle active" id="toggleRotate" title="Pausar / Reanudar Rotación de la Tierra">🔄</button>
+        <button class="icon-toggle active" id="toggleLines" title="Alternar Líneas de Constelaciones">✨</button>
+        <button class="icon-toggle active" id="toggleNames" title="Alternar Nombres">🌟</button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
