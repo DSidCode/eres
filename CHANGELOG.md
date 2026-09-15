@@ -3,6 +3,18 @@ Este documento registra cronológicamente los avances, epifanías creativas y me
 
 ---
 
+## [v3.7.0] - 15 de Septiembre, 2026
+
+### 🚀 Despliegue en Producción y Refactorización Estructural
+* **Integración de Google Analytics:** Inyectado el snippet de rastreo (`G-7285KS7TQ5`) en el portal interactivo para métricas de tráfico y retención de usuarios en tiempo real.
+* **Despliegue Serverless Oficial:** Publicación del proyecto a través de GitHub Pages usando el enlace nativo y corto: `https://DSidCode.github.io/eres/`.
+* **Reestructuración del Repositorio:**
+  * Toda la literatura narrativa, compendios, y guiones de realismo mágico movidos al directorio `/docs/`.
+  * Utilerías y scripts auxiliares de Python aislados en el directorio `/scripts/`.
+  * Limpieza profunda y optimización del archivo `README.md` enfocándose en el acceso web directo.
+
+---
+
 ## [v3.6.3] - 29 de Agosto, 2026
 
 ### 🪐 Navegación Esférica Planetaria (*Stellarium Style*) & Selector Rápido de Constelaciones
